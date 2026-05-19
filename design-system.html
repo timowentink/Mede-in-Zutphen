@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mede in Zutphen — Design System</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-donker:       #27351d;
+  --color-geel:         #fdc52f;
+  --color-groen:        #379850;
+  --color-blauw:        #3772ff;
+  --color-rood:         #fc511f;
+  --color-roze:         #f895c0;
+  --color-paars:        #8c60b9;
+  --color-lichtoranje:  #ffc288;
+  --color-donkeroranje: #c83d14;
+  --color-wit:          #ffffff;
+  --color-zand-5:       #f5f5ed;
+  --color-zand-10:      #f5f1e5;
+  --color-zand-25:      #d6d7cc;
+  --color-zand-50:      #9a958d;
+  --color-zwart-60:     #737372;
+  --color-zwart-80:     #50504f;
+  --color-zwart:        #151614;
+  --font:               'Switzer', system-ui, sans-serif;
+  --mono:               'SF Mono', 'Fira Code', monospace;
+  --shadow-1:           0 2px 8px rgba(21,22,20,0.08);
+  --shadow-2:           0 8px 32px rgba(21,22,20,0.10);
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--color-zand-5); color: var(--color-zwart); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+code { font-family: var(--mono); font-size: 13px; background: rgba(21,22,20,0.06); padding: 2px 6px; border-radius: 4px; }
+
+/* Layout */
+.layout { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar { width: 240px; flex-shrink: 0; position: fixed; top: 0; left: 0; bottom: 0; background: var(--color-zwart); display: flex; flex-direction: column; padding: 32px 0; z-index: 100; overflow-y: auto; }
+.sidebar-logo { padding: 0 24px 28px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 20px; }
+.sidebar-logo-title { font-size: 14px; font-weight: 600; color: #fff; letter-spacing: -0.02em; line-height: 1.2; }
+.sidebar-logo-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 3px; letter-spacing: 0.04em; text-transform: uppercase; }
+.sidebar-badge { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; background: var(--color-geel); color: var(--color-donker); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 40px; letter-spacing: 0.02em; }
+.sidebar-dot { width: 5px; height: 5px; background: var(--color-donker); border-radius: 50%; }
+.nav-section { padding: 0 16px; }
+.nav-label { font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 8px; margin-bottom: 4px; margin-top: 20px; display: block; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 8px; color: rgba(255,255,255,0.5); font-size: 13px; font-weight: 500; cursor: pointer; transition: background 0.15s, color 0.15s; border: none; background: none; width: 100%; text-align: left; }
+.nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.8); }
+.nav-item.active { background: rgba(255,255,255,0.1); color: #fff; }
+.nav-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.sidebar-footer { margin-top: auto; padding: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 11px; color: rgba(255,255,255,0.2); line-height: 1.6; }
+
+/* Main */
+.main { margin-left: 240px; flex: 1; padding: 60px; max-width: 1080px; }
+.section { display: none; }
+.section.active { display: block; }
+
+/* Page header */
+.page-header { margin-bottom: 48px; padding-bottom: 28px; border-bottom: 1px solid rgba(21,22,20,0.08); }
+.page-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-zand-50); margin-bottom: 8px; }
+.page-title { font-size: 40px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
+.page-desc { font-size: 15px; color: var(--color-zwart-60); margin-top: 8px; line-height: 1.6; max-width: 520px; }
+
+/* Token group */
+.token-group { margin-bottom: 44px; }
+.token-group-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-zand-50); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.token-group-title::after { content: ''; flex: 1; height: 1px; background: rgba(21,22,20,0.08); }
+
+/* Color grid */
+.color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(136px, 1fr)); gap: 10px; }
+.color-card { border-radius: 12px; overflow: hidden; background: #fff; box-shadow: var(--shadow-1); cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
+.color-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
+.color-card:active { transform: scale(0.97); }
+.color-swatch { height: 68px; position: relative; }
+.color-copy-hint { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.15); opacity: 0; transition: opacity 0.15s; font-size: 11px; font-weight: 600; color: #fff; letter-spacing: 0.04em; }
+.color-card:hover .color-copy-hint { opacity: 1; }
+.color-info { padding: 10px 12px 12px; }
+.color-name { font-size: 12px; font-weight: 600; color: var(--color-zwart); letter-spacing: -0.01em; }
+.color-hex { font-size: 11px; color: var(--color-zwart-60); font-family: var(--mono); margin-top: 2px; }
+
+/* Typography */
+.type-row { display: grid; grid-template-columns: 180px 1fr 180px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(21,22,20,0.06); gap: 24px; }
+.type-row:last-child { border-bottom: none; }
+.type-label { font-size: 11px; font-weight: 600; color: var(--color-zwart-60); font-family: var(--mono); }
+.type-preview { font-family: var(--font); color: var(--color-zwart); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.type-meta { font-size: 11px; color: var(--color-zand-50); font-family: var(--mono); text-align: right; line-height: 1.7; }
+
+/* Spacing */
+.spacing-list { display: flex; flex-direction: column; gap: 8px; }
+.spacing-row { display: flex; align-items: center; gap: 16px; padding: 10px 16px; background: #fff; border-radius: 10px; box-shadow: var(--shadow-1); }
+.spacing-label { font-size: 12px; font-weight: 600; font-family: var(--mono); min-width: 52px; color: var(--color-zwart); }
+.spacing-bar-wrap { flex: 1; max-width: 300px; }
+.spacing-bar { height: 6px; background: var(--color-donker); border-radius: 3px; opacity: 0.75; }
+.spacing-desc { font-size: 12px; color: var(--color-zwart-60); min-width: 120px; }
+
+/* Radius */
+.radius-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.radius-card { background: #fff; box-shadow: var(--shadow-1); padding: 20px; display: flex; flex-direction: column; gap: 12px; border-radius: 12px; }
+.radius-preview { width: 52px; height: 52px; background: var(--color-donker); opacity: 0.85; }
+.radius-val { font-size: 13px; font-weight: 600; font-family: var(--mono); color: var(--color-zwart); }
+.radius-name { font-size: 11px; color: var(--color-zwart-60); margin-top: 1px; }
+.radius-desc-text { font-size: 11px; color: var(--color-zand-50); margin-top: 2px; }
+
+/* ─── BUTTONS ─── */
+.btn { font-family: var(--font); font-weight: 400; letter-spacing: -0.01em; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.15s, transform 0.1s; white-space: nowrap; text-decoration: none; line-height: 1; }
+.btn:hover { opacity: 0.85; }
+.btn:active { transform: scale(0.97); }
+.btn:disabled, .btn.is-disabled { opacity: 0.38; cursor: not-allowed; pointer-events: none; }
+
+/* Sizes */
+.btn-s { font-size: 16px; line-height: 24px; padding: 8px 16px;  height: 40px; }
+.btn-m { font-size: 17px; line-height: 28px; padding: 12px 20px; height: 52px; }
+.btn-l { font-size: 17px; line-height: 28px; padding: 16px 24px; height: 60px; }
+
+/* Shape */
+.btn-round  { border-radius: 40px; }
+.btn-square { border-radius: 8px; }
+
+/* Icon only */
+.btn-icon-s { width: 40px; height: 40px; padding: 0; border-radius: 40px; }
+.btn-icon-m { width: 52px; height: 52px; padding: 0; border-radius: 40px; }
+
+/* Filled */
+.btn-primary   { background: var(--color-blauw);        color: #fff; }
+.btn-secondary { background: var(--color-zwart);        color: #fff; }
+.btn-dark      { background: var(--color-donker);       color: #fff; }
+.btn-alert     { background: var(--color-donkeroranje); color: #fff; }
+.btn-yellow    { background: var(--color-geel);         color: var(--color-donker); }
+.btn-green     { background: var(--color-groen);        color: #fff; }
+
+/* Ghost */
+.btn-ghost { background: transparent; color: var(--color-zwart); border: 1px solid var(--color-zand-25); }
+.btn-ghost:hover { background: rgba(21,22,20,0.04); opacity: 1; }
+.btn-ghost-dark { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+.btn-ghost-dark:hover { background: rgba(255,255,255,0.08); opacity: 1; }
+
+/* Demo */
+.btn-demo-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-zand-50); margin-bottom: 10px; }
+.btn-demo-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 20px; }
+.btn-demo-dark { background: var(--color-donker); border-radius: 16px; padding: 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 20px; }
+
+/* Spec table */
+.spec-table { width: 100%; border-collapse: collapse; }
+.spec-table th { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-zand-50); text-align: left; padding: 0 12px 10px; }
+.spec-table td { font-size: 13px; color: var(--color-zwart); padding: 10px 12px; border-top: 1px solid rgba(21,22,20,0.06); font-family: var(--mono); }
+.spec-table td:first-child { font-weight: 600; font-family: var(--font); }
+
+/* ─── FORM FIELDS ─── */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field-label { font-size: 14px; font-weight: 600; color: var(--color-zwart); display: flex; align-items: center; gap: 6px; letter-spacing: -0.01em; }
+.field-label-optional { font-size: 13px; font-weight: 400; color: var(--color-zwart-60); }
+.field-input { font-family: var(--font); font-size: 16px; font-weight: 400; color: var(--color-zwart); background: #fff; border: 1px solid var(--color-zand-25); border-radius: 8px; padding: 12px 16px; width: 100%; outline: none; transition: border-color 0.15s, box-shadow 0.15s; letter-spacing: -0.01em; -webkit-appearance: none; }
+.field-input::placeholder { color: var(--color-zand-50); }
+.field-input:hover:not(:disabled) { border-color: var(--color-zwart-60); }
+.field-input:focus { border-color: var(--color-zwart); box-shadow: 0 0 0 3px rgba(21,22,20,0.08); }
+.field-input--error { border-color: var(--color-rood); }
+.field-input--error:focus { box-shadow: 0 0 0 3px rgba(252,81,31,0.12); }
+.field-input:disabled { opacity: 0.4; cursor: not-allowed; background: var(--color-zand-5); }
+.field-subtext { font-size: 12px; color: var(--color-zwart-60); letter-spacing: -0.01em; }
+.field-subtext--error { color: var(--color-rood); }
+.field-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+.field-select-wrap { position: relative; }
+.field-select-wrap select { padding-right: 40px; cursor: pointer; }
+.field-select-icon { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--color-zwart-60); }
+.field-search-wrap { position: relative; }
+.field-search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--color-zwart-60); pointer-events: none; }
+.field-input--search { padding-left: 42px; border-radius: 40px; }
+
+/* Checkbox */
+.checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 400; color: var(--color-zwart); cursor: pointer; letter-spacing: -0.01em; user-select: none; }
+.checkbox-input { display: none; }
+.checkbox-box { width: 18px; height: 18px; border: 1.5px solid var(--color-zand-25); border-radius: 4px; background: #fff; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: border-color 0.15s, background 0.15s; }
+.checkbox-input:checked + .checkbox-box { background: var(--color-zwart); border-color: var(--color-zwart); }
+.check-icon { display: none; }
+.checkbox-input:checked + .checkbox-box .check-icon { display: block; }
+.checkbox-group { display: flex; flex-direction: column; gap: 10px; }
+
+/* Code blocks */
+.code-wrap { position: relative; margin-bottom: 24px; }
+.code-label { font-size: 11px; font-weight: 600; color: var(--color-zand-50); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; padding: 24px 28px; font-size: 12.5px; line-height: 1.7; overflow-x: auto; font-family: var(--mono); box-shadow: var(--shadow-2); white-space: pre; }
+.copy-btn { position: absolute; top: 36px; right: 12px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 600; font-family: var(--font); padding: 5px 12px; border-radius: 6px; cursor: pointer; letter-spacing: 0.02em; transition: background 0.15s, color 0.15s; }
+.copy-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+.copy-btn.copied { color: #7ec89a; border-color: rgba(126,200,154,0.3); }
+
+/* Shadow demo */
+.shadow-cards { display: flex; gap: 20px; flex-wrap: wrap; }
+.shadow-card { background: #fff; border-radius: 16px; padding: 24px 32px; }
+.shadow-card-label { font-size: 13px; font-weight: 500; color: var(--color-zwart); margin-bottom: 6px; }
+.shadow-card-value { font-size: 11px; font-family: var(--mono); color: var(--color-zand-50); line-height: 1.7; }
+
+/* Toast */
+.toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(8px); background: var(--color-donker); color: #fff; font-size: 13px; font-weight: 500; padding: 10px 20px; border-radius: 40px; box-shadow: var(--shadow-2); opacity: 0; transition: opacity 0.2s, transform 0.2s; pointer-events: none; z-index: 999; white-space: nowrap; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Animations */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.section.active > * { animation: fadeUp 0.28s ease both; }
+.section.active > *:nth-child(2) { animation-delay: 0.04s; }
+.section.active > *:nth-child(3) { animation-delay: 0.08s; }
+.section.active > *:nth-child(4) { animation-delay: 0.12s; }
+.section.active > *:nth-child(5) { animation-delay: 0.16s; }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-zand-25); border-radius: 3px; }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-title">Mede in Zutphen</div>
+    <div class="sidebar-logo-sub">Design System v1.0</div>
+  </div>
+  <div class="nav-section">
+    <span class="nav-label">Tokens</span>
+    <button class="nav-item active" onclick="nav('colors',this)"><span class="nav-dot" style="background:#fdc52f"></span>Kleuren</button>
+    <button class="nav-item" onclick="nav('typography',this)"><span class="nav-dot" style="background:#3772ff"></span>Typografie</button>
+    <button class="nav-item" onclick="nav('spacing',this)"><span class="nav-dot" style="background:#379850"></span>Spacing</button>
+    <button class="nav-item" onclick="nav('radius',this)"><span class="nav-dot" style="background:#8c60b9"></span>Border radius</button>
+    <button class="nav-item" onclick="nav('shadows',this)"><span class="nav-dot" style="background:#9a958d"></span>Shadows</button>
+    <span class="nav-label">Componenten</span>
+    <button class="nav-item" onclick="nav('buttons',this)"><span class="nav-dot" style="background:#fc511f"></span>Buttons</button>
+    <button class="nav-item" onclick="nav('forms',this)"><span class="nav-dot" style="background:#d6d7cc"></span>Form fields</button>
+    <span class="nav-label">Code</span>
+    <button class="nav-item" onclick="nav('css',this)"><span class="nav-dot" style="background:#f895c0"></span>CSS variabelen</button>
+    <button class="nav-item" onclick="nav('tailwind',this)"><span class="nav-dot" style="background:#ffc288"></span>Tailwind config</button>
+  </div>
+</aside>
+
+<!-- ═══ MAIN ═══ -->
+<main class="main">
+
+<!-- COLORS -->
+<div id="section-colors" class="section active">
+  <div class="page-header">
+    <div class="page-eyebrow">Tokens</div>
+    <h1 class="page-title">Kleuren</h1>
+    <p class="page-desc">Klik op een kleur om de hex-waarde naar je clipboard te kopiëren.</p>
+  </div>
+  <div class="token-group"><div class="token-group-title">Primair</div><div class="color-grid" id="cg-primary"></div></div>
+  <div class="token-group"><div class="token-group-title">Functioneel</div><div class="color-grid" id="cg-functional"></div></div>
+  <div class="token-group"><div class="token-group-title">Neutraal &amp; Zand</div><div class="color-grid" id="cg-neutral"></div></div>
+</div>
+
+<!-- TYPOGRAPHY -->
+<div id="section-typography" class="section">
+  <div class="page-header">
+    <div class="page-eyebrow">Tokens</div>
+    <h1 class="page-title">Typografie</h1>
+    <p class="page-desc">Switzer — laden via <code>@fontsource/switzer</code> (npm) of Fontshare CDN.</p>
+  </div>
+  <div class="token-group"><div class="token-group-title">Display &amp; Headings</div><div id="type-display"></div></div>
+  <div class="token-group"><div class="token-group-title">Body &amp; Caption</div><div id="type-body"></div></div>
+</div>
+
+<!-- SPACING -->
+<div id="section-spacing" class="section">
+  <div class="page-header">
+    <div class="page-eyebrow">Tokens</div>
+    <h1 class="page-title">Spacing</h1>
+    <p class="page-desc">Gebruik als <code>--space-*</code> CSS variabelen of Tailwind spacing utilities.</p>
+  </div>
+  <div class="token-group"><div class="token-group-title">Schaal</div><div class="spacing-list" id="spacing-list"></div></div>
+</div>
+
+<!-- RADIUS -->
+<div id="section-radius" class="section">
+  <div class="page-header">
+    <div class="page-eyebrow">Tokens</div>
+    <h1 class="page-title">Border radius</h1>
+    <p class="page-desc">Van scherpe navigatie-elementen tot grote achtergrondvormen.</p>
+  </div>
+  <div class="token-group"><div class="token-group-title">Stappen</div><div class="radius-grid" id="radius-grid"></div></div>
+</div>
+
+<!-- SHADOWS -->
+<div id="section-shadows" class="section">
+  <div class="page-header">
+    <div class="page-eyebrow">Tokens</div>
+    <h1 class="page-title">Shadows</h1>
+    <p class="page-desc">Subtiele diepte voor kaarten en overlays.</p>
+  </div>
+  <div class="token-group">
+    <div class="token-group-title">Elevation</div>
+    <div class="shadow-cards">
+      <div class="shadow-card" style="box-shadow:0 2px 8px rgba(21,22,20,0.08)">
+        <div class="shadow-card-label">Elevation 1</div>
+        <div class="shadow-card-value">0 2px 8px rgba(21,22,20,.08)<br>CSS: var(--shadow-elevation-1)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BUTTONS -->
+<div id="section-buttons" class="section">
+  <div class="page-header">
+    <div class="page-eyebrow">Componenten</div>
+    <h1 class="page-title">Buttons</h1>
+    <p class="page-desc">Twee shapes: <strong>Round</strong> (40px) en <strong>Square</strong> (8px). Drie maten: S · M · L. Filled, ghost, en icon-only varianten.</p>
+  </div>
+
+  <!-- Filled Round -->
+  <div class="token-group">
+    <div class="token-group-title">Filled — Round</div>
+    <div class="btn-demo-label">Primary · alle maten</div>
+    <div class="btn-demo-row">
+      <button class="btn btn-s btn-round btn-primary">Ontdekken</button>
+      <button class="btn btn-m btn-round btn-primary">Ontdekken</button>
+      <button class="btn btn-l btn-round btn-primary">Ontdekken</button>
+      <button class="btn btn-m btn-round btn-primary is-disabled">Disabled</button>
+    </div>
+    <div class="btn-demo-label">Overige kleuren (M)</div>
+    <div class="btn-demo-row">
+      <button class="btn btn-m btn-round btn-secondary">Secondary</button>
+      <button class="btn btn-m btn-round btn-alert">Alert</button>
+      <button class="btn btn-m btn-round btn-yellow">Yellow</button>
+      <button class="btn btn-m btn-round btn-green">Green</button>
+      <button class="btn btn-m btn-round btn-dark">Dark</button>
+    </div>
+  </div>
+
+  <!-- Filled Square -->
+  <div class="token-group">
+    <div class="token-group-title">Filled — Square</div>
+    <div class="btn-demo-row">
+      <button class="btn btn-s btn-square btn-secondary">Ontdekken</button>
+      <button class="btn btn-m btn-square btn-secondary">Ontdekken</button>
+      <button class="btn btn-l btn-square btn-secondary">Ontdekken</button>
+    </div>
+    <div class="btn-demo-row">
+      <button class="btn btn-m btn-square btn-primary">Primary</button>
+      <button class="btn btn-m btn-square btn-alert">Alert</button>
+      <button class="btn btn-m btn-square btn-yellow">Yellow</button>
+      <button class="btn btn-m btn-square btn-green">Green</button>
+    </div>
+  </div>
+
+  <!-- Ghost -->
+  <div class="token-group">
+    <div class="token-group-title">Ghost (border only)</div>
+    <div class="btn-demo-label">Op lichte achtergrond — Round</div>
+    <div class="btn-demo-row">
+      <button class="btn btn-s btn-round btn-ghost">Ontdekken</button>
+      <button class="btn btn-m btn-round btn-ghost">Ontdekken</button>
+      <button class="btn btn-l btn-round btn-ghost">Ontdekken</button>
+    </div>
+    <div class="btn-demo-label">Op donkere achtergrond</div>
+    <div class="btn-demo-dark">
+      <button class="btn btn-s btn-round btn-ghost-dark">Ontdekken</button>
+      <button class="btn btn-m btn-round btn-ghost-dark">Ontdekken</button>
+      <button class="btn btn-l btn-round btn-ghost-dark">Ontdekken</button>
+    </div>
+    <div class="btn-demo-label">Square</div>
+    <div class="btn-demo-row">
+      <button class="btn btn-s btn-square btn-ghost">Ontdekken</button>
+      <button class="btn btn-m btn-square btn-ghost">Ontdekken</button>
+      <button class="btn btn-l btn-square btn-ghost">Ontdekken</button>
+    </div>
+  </div>
+
+  <!-- With icon -->
+  <div class="token-group">
+    <div class="token-group-title">Met icon (links)</div>
+    <div class="btn-demo-row">
+      <button class="btn btn-s btn-round btn-ghost">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        Ontdekken
+      </button>
+      <button class="btn btn-m btn-round btn-ghost">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        Voorbeeld
+      </button>
+      <button class="btn btn-l btn-round btn-ghost">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        Ontdekken
+      </button>
+    </div>
+    <div class="btn-demo-row">
+      <button class="btn btn-m btn-round btn-primary">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Ontdekken
+      </button>
+      <button class="btn btn-m btn-square btn-secondary">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        Zoeken
+      </button>
+    </div>
+  </div>
+
+  <!-- Icon only -->
+  <div class="token-group">
+    <div class="token-group-title">Icon only</div>
+    <div class="btn-demo-row">
+      <button class="btn btn-icon-s btn-ghost">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <button class="btn btn-icon-m btn-ghost">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <button class="btn btn-icon-s btn-secondary">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </button>
+      <button class="btn btn-icon-s btn-ghost" style="color:var(--color-zwart-60)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <button class="btn btn-icon-m btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Specs -->
+  <div class="token-group">
+    <div class="token-group-title">Specificaties</div>
+    <table class="spec-table">
+      <thead><tr><th>Maat</th><th>Hoogte</th><th>Font size</th><th>Line height</th><th>Padding H</th><th>Padding V</th></tr></thead>
+      <tbody>
+        <tr><td>S</td><td>40px</td><td>16px</td><td>24px</td><td>16px</td><td>8px</td></tr>
+        <tr><td>M</td><td>52px</td><td>17px</td><td>28px</td><td>20px</td><td>12px</td></tr>
+        <tr><td>L</td><td>60px</td><td>17px</td><td>28px</td><td>24px</td><td>16px</td></tr>
+        <tr><td colspan="6" style="color:var(--color-zand-50);font-family:var(--font);font-size:12px">Font weight: 400 Regular · Icon gap: 8px · Ghost border: 1px solid var(--color-zand-25)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- FORM FIELDS -->
+<div id="section-forms" class="section">
+  <div class="page-header">
+    <div class="page-eyebrow">Componenten</div>
+    <h1 class="page-title">Form fields</h1>
+    <p class="page-desc">Switzer Regular 16px · border-radius 8px · border 1px solid Zand-25. Alle interactieve states zijn hieronder gedemonstreerd.</p>
+  </div>
+
+  <!-- Text input states -->
+  <div class="token-group">
+    <div class="token-group-title">Text input — states</div>
+    <div style="max-width:480px;display:flex;flex-direction:column;gap:20px;">
+      <div class="field">
+        <label class="field-label">Bericht <span class="field-label-optional">Optioneel</span></label>
+        <input class="field-input" type="text" placeholder="Placeholder">
+        <span class="field-subtext">Subtext</span>
+      </div>
+      <div class="field">
+        <label class="field-label">Bericht <span class="field-label-optional">Optioneel</span></label>
+        <input class="field-input" type="text" value="Ingevulde waarde" style="border-color:var(--color-zwart);box-shadow:0 0 0 3px rgba(21,22,20,0.08)">
+        <span class="field-subtext">Focus state</span>
+      </div>
+      <div class="field">
+        <label class="field-label">Bericht <span class="field-label-optional">Optioneel</span></label>
+        <input class="field-input field-input--error" type="text" value="Ongeldig e-mailadres">
+        <span class="field-subtext field-subtext--error">Dit veld is verplicht</span>
+      </div>
+      <div class="field">
+        <label class="field-label" style="opacity:.4">Bericht <span class="field-label-optional">Optioneel</span></label>
+        <input class="field-input" type="text" placeholder="Placeholder" disabled>
+        <span class="field-subtext" style="opacity:.4">Disabled state</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Select -->
+  <div class="token-group">
+    <div class="token-group-title">Select / dropdown</div>
+    <div style="max-width:480px;">
+      <div class="field">
+        <label class="field-label">Bericht <span class="field-label-optional">Optioneel</span></label>
+        <div class="field-select-wrap">
+          <select class="field-input">
+            <option value="" disabled selected>Placeholder</option>
+            <option>Optie 1</option>
+            <option>Optie 2</option>
+            <option>Optie 3</option>
+          </select>
+          <span class="field-select-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </div>
+        <span class="field-subtext">Subtext</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Textarea -->
+  <div class="token-group">
+    <div class="token-group-title">Textarea</div>
+    <div style="max-width:480px;">
+      <div class="field">
+        <label class="field-label">Bericht</label>
+        <textarea class="field-input field-textarea" placeholder="Schrijf hier je bericht..."></textarea>
+        <span class="field-subtext">Minimale hoogte 100px · resize: vertical</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="token-group">
+    <div class="token-group-title">Zoekbalk</div>
+    <div style="max-width:320px;">
+      <div class="field-search-wrap">
+        <span class="field-search-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+        <input class="field-input field-input--search" type="search" placeholder="Zoeken">
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkbox -->
+  <div class="token-group">
+    <div class="token-group-title">Checkbox</div>
+    <div class="checkbox-group">
+      <label class="checkbox-label">
+        <input class="checkbox-input" type="checkbox">
+        <span class="checkbox-box"><svg class="check-icon" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5l2.5 2.5 4.5-4.5"/></svg></span>
+        Hulp &amp; gezelschap
+      </label>
+      <label class="checkbox-label">
+        <input class="checkbox-input" type="checkbox" checked>
+        <span class="checkbox-box"><svg class="check-icon" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5l2.5 2.5 4.5-4.5"/></svg></span>
+        Maaltijden bezorgen
+      </label>
+      <label class="checkbox-label" style="opacity:.38;pointer-events:none">
+        <input class="checkbox-input" type="checkbox" disabled>
+        <span class="checkbox-box"></span>
+        Disabled optie
+      </label>
+    </div>
+  </div>
+
+  <!-- Specs -->
+  <div class="token-group">
+    <div class="token-group-title">Specificaties</div>
+    <table class="spec-table">
+      <thead><tr><th>Token</th><th>Waarde</th><th>CSS var</th></tr></thead>
+      <tbody>
+        <tr><td>Border radius</td><td>8px</td><td>--radius-8</td></tr>
+        <tr><td>Border (default)</td><td>1px solid #d6d7cc</td><td>--color-zand-25</td></tr>
+        <tr><td>Border (focus)</td><td>1px solid #151614</td><td>--color-zwart</td></tr>
+        <tr><td>Focus ring</td><td>0 0 0 3px rgba(21,22,20,.08)</td><td>—</td></tr>
+        <tr><td>Border (error)</td><td>1px solid #fc511f</td><td>--color-rood</td></tr>
+        <tr><td>Font size</td><td>16px / Regular</td><td>--font-switzer</td></tr>
+        <tr><td>Padding</td><td>12px 16px</td><td>--space-12 / --space-16</td></tr>
+        <tr><td>Search radius</td><td>40px (pill)</td><td>--radius-40</td></tr>
+        <tr><td>Placeholder kleur</td><td>#9a958d</td><td>--color-zand-50</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- CSS -->
+<div id="section-css" class="section">
+  <div class="page-header">
+    <div class="page-eyebrow">Code</div>
+    <h1 class="page-title">CSS variabelen</h1>
+    <p class="page-desc">Plak in <code>resources/css/app.css</code>. Importeer Switzer bovenaan via Fontshare of npm.</p>
+  </div>
+  <div class="code-wrap"><div class="code-label">:root — alle tokens</div><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-css"></pre></div>
+  <div class="code-wrap"><div class="code-label">Typografie utility classes</div><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-css-type"></pre></div>
+  <div class="code-wrap"><div class="code-label">Button classes</div><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-css-btn"></pre></div>
+  <div class="code-wrap"><div class="code-label">Form field classes</div><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-css-form"></pre></div>
+</div>
+
+<!-- TAILWIND -->
+<div id="section-tailwind" class="section">
+  <div class="page-header">
+    <div class="page-eyebrow">Code</div>
+    <h1 class="page-title">Tailwind config</h1>
+    <p class="page-desc">Drop-in <code>tailwind.config.js</code> voor een standaard Laravel + Vite setup.</p>
+  </div>
+  <div class="code-wrap"><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-tailwind"></pre></div>
+</div>
+
+</main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const COLORS = {
+  primary: [
+    { name:'Donker',       hex:'#27351d' },
+    { name:'Geel',         hex:'#fdc52f' },
+  ],
+  functional: [
+    { name:'Blauw',        hex:'#3772ff' },
+    { name:'Groen',        hex:'#379850' },
+    { name:'Rood',         hex:'#fc511f' },
+    { name:'DonkerOranje', hex:'#c83d14' },
+    { name:'LichtOranje',  hex:'#ffc288' },
+    { name:'Roze',         hex:'#f895c0' },
+    { name:'Paars',        hex:'#8c60b9' },
+  ],
+  neutral: [
+    { name:'Wit',      hex:'#ffffff' },
+    { name:'Zand 5',   hex:'#f5f5ed' },
+    { name:'Zand 10',  hex:'#f5f1e5' },
+    { name:'Zand 25',  hex:'#d6d7cc' },
+    { name:'Zand 50',  hex:'#9a958d' },
+    { name:'Zwart 60', hex:'#737372' },
+    { name:'Zwart 80', hex:'#50504f' },
+    { name:'Zwart',    hex:'#151614' },
+  ]
+};
+
+const TYPOGRAPHY = {
+  display: [
+    { label:'Display',      size:96, weight:600, lh:'96px',   ls:'-0.04em' },
+    { label:'Display-em',   size:96, weight:800, lh:'96px',   ls:'-0.04em' },
+    { label:'Heading 1',    size:66, weight:600, lh:'66px',   ls:'-0.03em' },
+    { label:'Heading 1-em', size:66, weight:700, lh:'66px',   ls:'-0.03em' },
+    { label:'Heading 2',    size:54, weight:600, lh:'54px',   ls:'-0.02em' },
+    { label:'Heading 2-em', size:54, weight:700, lh:'54px',   ls:'-0.02em' },
+    { label:'Heading 3',    size:36, weight:500, lh:'43px',   ls:'-0.02em' },
+    { label:'Heading 3-em', size:36, weight:600, lh:'43px',   ls:'-0.02em' },
+    { label:'Heading 4',    size:29, weight:500, lh:'37px',   ls:'-0.02em' },
+    { label:'Heading 4-em', size:29, weight:600, lh:'37px',   ls:'-0.02em' },
+    { label:'Heading 5',    size:24, weight:500, lh:'32px',   ls:'-0.01em' },
+    { label:'Heading 5-em', size:24, weight:600, lh:'32px',   ls:'-0.01em' },
+    { label:'Heading 6',    size:21, weight:400, lh:'27px',   ls:'-0.01em' },
+    { label:'Heading 6-em', size:21, weight:500, lh:'27px',   ls:'-0.01em' },
+  ],
+  body: [
+    { label:'Body Large',    size:18, weight:400, lh:'25.2px', ls:'-0.01em' },
+    { label:'Body Large-em', size:18, weight:500, lh:'25.2px', ls:'-0.01em' },
+    { label:'Body',          size:16, weight:400, lh:'25.2px', ls:'-0.01em' },
+    { label:'Body-em',       size:16, weight:500, lh:'25.2px', ls:'-0.01em' },
+    { label:'Body Small',    size:14, weight:400, lh:'20px',   ls:'-0.01em' },
+    { label:'Body Small-em', size:14, weight:500, lh:'20px',   ls:'-0.01em' },
+    { label:'Caption',       size:12, weight:500, lh:'15px',   ls:'-0.01em' },
+    { label:'Caption-em',    size:12, weight:700, lh:'15px',   ls:'-0.01em' },
+  ]
+};
+
+const SPACING = [
+  { val:'4px', desc:'' }, { val:'8px', desc:'' }, { val:'12px', desc:'' },
+  { val:'16px', desc:'' }, { val:'20px', desc:'' }, { val:'24px', desc:'' },
+  { val:'32px', desc:'' }, { val:'40px', desc:'' }, { val:'60px', desc:'' },
+  { val:'80px', desc:'Top padding' }, { val:'120px', desc:'Tussen objecten' },
+  { val:'160px', desc:'' }, { val:'240px', desc:'Tussen secties' },
+];
+
+const RADIUS = [
+  { val:'4px',  name:'border-4',  desc:'' },
+  { val:'8px',  name:'border-8',  desc:'Navigatie-elementen' },
+  { val:'24px', name:'border-24', desc:'Medium cards' },
+  { val:'40px', name:'border-40', desc:'Grote cards & buttons' },
+  { val:'64px', name:'border-64', desc:'Achtergronden' },
+];
+
+function renderColors(id, items) {
+  const g = document.getElementById(id);
+  items.forEach(c => {
+    const el = document.createElement('div');
+    el.className = 'color-card';
+    el.title = `Klik om ${c.hex} te kopiëren`;
+    el.innerHTML = `<div class="color-swatch" style="background:${c.hex}"><div class="color-copy-hint">Kopieer</div></div><div class="color-info"><div class="color-name">${c.name}</div><div class="color-hex">${c.hex}</div></div>`;
+    el.onclick = () => { navigator.clipboard.writeText(c.hex); showToast(`${c.name} — ${c.hex}`); };
+    g.appendChild(el);
+  });
+}
+
+function renderTypo(id, items) {
+  const c = document.getElementById(id);
+  items.forEach(t => {
+    const sz = Math.min(t.size, 34);
+    const row = document.createElement('div');
+    row.className = 'type-row';
+    row.innerHTML = `<div class="type-label">${t.label}</div><div class="type-preview" style="font-size:${sz}px;font-weight:${t.weight};line-height:1.2;letter-spacing:${t.ls}">${t.label}</div><div class="type-meta">${t.size}px · ${t.weight}<br>${t.lh} lh · ${t.ls}</div>`;
+    c.appendChild(row);
+  });
+}
+
+function renderSpacing() {
+  const list = document.getElementById('spacing-list');
+  SPACING.forEach(s => {
+    const px = parseInt(s.val);
+    const w = Math.max(Math.round((px / 240) * 300), 4);
+    const row = document.createElement('div');
+    row.className = 'spacing-row';
+    row.innerHTML = `<span class="spacing-label">${s.val}</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:${w}px"></div></div><span class="spacing-desc">${s.desc}</span>`;
+    list.appendChild(row);
+  });
+}
+
+function renderRadius() {
+  const g = document.getElementById('radius-grid');
+  RADIUS.forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'radius-card';
+    card.innerHTML = `<div class="radius-preview" style="border-radius:${r.val}"></div><div><div class="radius-val">${r.val}</div><div class="radius-name">${r.name}</div>${r.desc?`<div class="radius-desc-text">${r.desc}</div>`:''}</div>`;
+    g.appendChild(card);
+  });
+}
+
+const CSS_ROOT = `:root {
+  /* Kleuren — Primair */
+  --color-donker:       #27351d;
+  --color-geel:         #fdc52f;
+
+  /* Kleuren — Functioneel */
+  --color-blauw:        #3772ff;
+  --color-groen:        #379850;
+  --color-rood:         #fc511f;
+  --color-donkeroranje: #c83d14;
+  --color-lichtoranje:  #ffc288;
+  --color-roze:         #f895c0;
+  --color-paars:        #8c60b9;
+
+  /* Kleuren — Neutraal */
+  --color-wit:          #ffffff;
+  --color-zand-5:       #f5f5ed;
+  --color-zand-10:      #f5f1e5;
+  --color-zand-25:      #d6d7cc;
+  --color-zand-50:      #9a958d;
+  --color-zwart-60:     #737372;
+  --color-zwart-80:     #50504f;
+  --color-zwart:        #151614;
+
+  /* Typografie */
+  --font-switzer: 'Switzer', system-ui, sans-serif;
+
+  /* Spacing */
+  --space-4:   4px;   --space-8:   8px;   --space-12:  12px;
+  --space-16:  16px;  --space-20:  20px;  --space-24:  24px;
+  --space-32:  32px;  --space-40:  40px;  --space-60:  60px;
+  --space-80:  80px;  --space-120: 120px; --space-160: 160px;
+  --space-240: 240px;
+
+  /* Border radius */
+  --radius-4:  4px;   /* scherp */
+  --radius-8:  8px;   /* navigatie-elementen, inputs */
+  --radius-24: 24px;  /* medium cards */
+  --radius-40: 40px;  /* grote cards, buttons round */
+  --radius-64: 64px;  /* achtergronden */
+
+  /* Shadows */
+  --shadow-elevation-1: 0 2px 8px rgba(21, 22, 20, 0.08);
+
+  /* Buttons */
+  --btn-height-s: 40px;
+  --btn-height-m: 52px;
+  --btn-height-l: 60px;
+}`;
+
+const CSS_TYPE = `/* Typografie utility classes — Switzer */
+.text-display    { font-family: var(--font-switzer); font-size: 96px; font-weight: 600; line-height: 96px;   letter-spacing: -0.04em; }
+.text-display-em { font-family: var(--font-switzer); font-size: 96px; font-weight: 800; line-height: 96px;   letter-spacing: -0.04em; }
+.text-h1         { font-family: var(--font-switzer); font-size: 66px; font-weight: 600; line-height: 66px;   letter-spacing: -0.03em; }
+.text-h1-em      { font-family: var(--font-switzer); font-size: 66px; font-weight: 700; line-height: 66px;   letter-spacing: -0.03em; }
+.text-h2         { font-family: var(--font-switzer); font-size: 54px; font-weight: 600; line-height: 54px;   letter-spacing: -0.02em; }
+.text-h2-em      { font-family: var(--font-switzer); font-size: 54px; font-weight: 700; line-height: 54px;   letter-spacing: -0.02em; }
+.text-h3         { font-family: var(--font-switzer); font-size: 36px; font-weight: 500; line-height: 43px;   letter-spacing: -0.02em; }
+.text-h3-em      { font-family: var(--font-switzer); font-size: 36px; font-weight: 600; line-height: 43px;   letter-spacing: -0.02em; }
+.text-h4         { font-family: var(--font-switzer); font-size: 29px; font-weight: 500; line-height: 37px;   letter-spacing: -0.02em; }
+.text-h4-em      { font-family: var(--font-switzer); font-size: 29px; font-weight: 600; line-height: 37px;   letter-spacing: -0.02em; }
+.text-h5         { font-family: var(--font-switzer); font-size: 24px; font-weight: 500; line-height: 32px;   letter-spacing: -0.01em; }
+.text-h5-em      { font-family: var(--font-switzer); font-size: 24px; font-weight: 600; line-height: 32px;   letter-spacing: -0.01em; }
+.text-h6         { font-family: var(--font-switzer); font-size: 21px; font-weight: 400; line-height: 27px;   letter-spacing: -0.01em; }
+.text-h6-em      { font-family: var(--font-switzer); font-size: 21px; font-weight: 500; line-height: 27px;   letter-spacing: -0.01em; }
+.text-body-lg    { font-family: var(--font-switzer); font-size: 18px; font-weight: 400; line-height: 25.2px; letter-spacing: -0.01em; }
+.text-body-lg-em { font-family: var(--font-switzer); font-size: 18px; font-weight: 500; line-height: 25.2px; letter-spacing: -0.01em; }
+.text-body       { font-family: var(--font-switzer); font-size: 16px; font-weight: 400; line-height: 25.2px; letter-spacing: -0.01em; }
+.text-body-em    { font-family: var(--font-switzer); font-size: 16px; font-weight: 500; line-height: 25.2px; letter-spacing: -0.01em; }
+.text-body-sm    { font-family: var(--font-switzer); font-size: 14px; font-weight: 400; line-height: 20px;   letter-spacing: -0.01em; }
+.text-body-sm-em { font-family: var(--font-switzer); font-size: 14px; font-weight: 500; line-height: 20px;   letter-spacing: -0.01em; }
+.text-caption    { font-family: var(--font-switzer); font-size: 12px; font-weight: 500; line-height: 15px;   letter-spacing: -0.01em; }
+.text-caption-em { font-family: var(--font-switzer); font-size: 12px; font-weight: 700; line-height: 15px;   letter-spacing: -0.01em; }`;
+
+const CSS_BTN = `/* Buttons */
+.btn {
+  font-family: var(--font-switzer);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+.btn:hover   { opacity: 0.85; }
+.btn:active  { transform: scale(0.97); }
+.btn:disabled { opacity: 0.38; cursor: not-allowed; }
+
+/* Maten */
+.btn-s { font-size: 16px; line-height: 24px; padding: 8px 16px;  height: 40px; }
+.btn-m { font-size: 17px; line-height: 28px; padding: 12px 20px; height: 52px; }
+.btn-l { font-size: 17px; line-height: 28px; padding: 16px 24px; height: 60px; }
+
+/* Icon only */
+.btn-icon-s { width: 40px; height: 40px; padding: 0; }
+.btn-icon-m { width: 52px; height: 52px; padding: 0; }
+
+/* Shape */
+.btn-round  { border-radius: 40px; }
+.btn-square { border-radius: 8px; }
+
+/* Filled */
+.btn-primary   { background: var(--color-blauw);        color: #fff; }
+.btn-secondary { background: var(--color-zwart);        color: #fff; }
+.btn-dark      { background: var(--color-donker);       color: #fff; }
+.btn-alert     { background: var(--color-donkeroranje); color: #fff; }
+.btn-yellow    { background: var(--color-geel);         color: var(--color-donker); }
+.btn-green     { background: var(--color-groen);        color: #fff; }
+
+/* Ghost */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-zwart);
+  border: 1px solid var(--color-zand-25);
+}
+.btn-ghost:hover { background: rgba(21,22,20,0.04); opacity: 1; }
+
+.btn-ghost-dark {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.btn-ghost-dark:hover { background: rgba(255,255,255,0.08); opacity: 1; }`;
+
+const CSS_FORM = `/* Form fields */
+.field       { display: flex; flex-direction: column; gap: 6px; }
+.field-label { font-size: 14px; font-weight: 600; color: var(--color-zwart); letter-spacing: -0.01em; }
+.field-label-optional { font-size: 13px; font-weight: 400; color: var(--color-zwart-60); }
+
+.field-input {
+  font-family: var(--font-switzer);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-zwart);
+  background: #fff;
+  border: 1px solid var(--color-zand-25);
+  border-radius: 8px;
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  letter-spacing: -0.01em;
+  -webkit-appearance: none;
+}
+
+.field-input::placeholder { color: var(--color-zand-50); }
+.field-input:hover:not(:disabled) { border-color: var(--color-zwart-60); }
+
+.field-input:focus {
+  border-color: var(--color-zwart);
+  box-shadow: 0 0 0 3px rgba(21, 22, 20, 0.08);
+}
+
+.field-input--error { border-color: var(--color-rood); }
+.field-input--error:focus { box-shadow: 0 0 0 3px rgba(252, 81, 31, 0.12); }
+.field-input:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.field-subtext        { font-size: 12px; color: var(--color-zwart-60); }
+.field-subtext--error { color: var(--color-rood); }
+
+/* Textarea */
+.field-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+/* Select */
+.field-select-wrap         { position: relative; }
+.field-select-wrap select  { padding-right: 40px; cursor: pointer; }
+.field-select-icon         { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+
+/* Search */
+.field-search-wrap  { position: relative; }
+.field-search-icon  { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.field-input--search { padding-left: 42px; border-radius: 40px; }
+
+/* Checkbox */
+.checkbox-label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 15px; }
+.checkbox-input { display: none; }
+.checkbox-box {
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--color-zand-25);
+  border-radius: 4px; background: #fff; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+.checkbox-input:checked + .checkbox-box {
+  background: var(--color-zwart);
+  border-color: var(--color-zwart);
+}`;
+
+const TW_CONFIG = `/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    './resources/**/*.blade.php',
+    './resources/**/*.js',
+    './resources/**/*.vue',
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        switzer: ['Switzer', 'system-ui', 'sans-serif'],
+      },
+      colors: {
+        donker:       '#27351d',
+        geel:         '#fdc52f',
+        blauw:        '#3772ff',
+        groen:        '#379850',
+        rood:         '#fc511f',
+        donkeroranje: '#c83d14',
+        lichtoranje:  '#ffc288',
+        roze:         '#f895c0',
+        paars:        '#8c60b9',
+        wit:          '#ffffff',
+        zand: {
+          5:  '#f5f5ed',
+          10: '#f5f1e5',
+          25: '#d6d7cc',
+          50: '#9a958d',
+        },
+        zwart: {
+          DEFAULT: '#151614',
+          60: '#737372',
+          80: '#50504f',
+        },
+      },
+      spacing: {
+        4: '4px', 8: '8px', 12: '12px', 16: '16px', 20: '20px',
+        24: '24px', 32: '32px', 40: '40px', 60: '60px',
+        80: '80px', 120: '120px', 160: '160px', 240: '240px',
+      },
+      borderRadius: {
+        sm:    '4px',
+        md:    '8px',
+        lg:    '24px',
+        xl:    '40px',
+        '2xl': '64px',
+        full:  '9999px',
+      },
+      fontSize: {
+        display:   ['96px', { lineHeight: '96px',   letterSpacing: '-0.04em' }],
+        h1:        ['66px', { lineHeight: '66px',   letterSpacing: '-0.03em' }],
+        h2:        ['54px', { lineHeight: '54px',   letterSpacing: '-0.02em' }],
+        h3:        ['36px', { lineHeight: '43px',   letterSpacing: '-0.02em' }],
+        h4:        ['29px', { lineHeight: '37px',   letterSpacing: '-0.02em' }],
+        h5:        ['24px', { lineHeight: '32px',   letterSpacing: '-0.01em' }],
+        h6:        ['21px', { lineHeight: '27px',   letterSpacing: '-0.01em' }],
+        'body-lg': ['18px', { lineHeight: '25.2px', letterSpacing: '-0.01em' }],
+        body:      ['16px', { lineHeight: '25.2px', letterSpacing: '-0.01em' }],
+        'body-sm': ['14px', { lineHeight: '20px',   letterSpacing: '-0.01em' }],
+        caption:   ['12px', { lineHeight: '15px',   letterSpacing: '-0.01em' }],
+      },
+      fontWeight: {
+        regular:   '400',
+        medium:    '500',
+        semibold:  '600',
+        bold:      '700',
+        extrabold: '800',
+      },
+      height: {
+        'btn-s': '40px',
+        'btn-m': '52px',
+        'btn-l': '60px',
+      },
+      boxShadow: {
+        'elevation-1': '0 2px 8px rgba(21, 22, 20, 0.08)',
+      },
+    },
+  },
+  plugins: [],
+}`;
+
+function nav(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function copyPre(btn) {
+  const pre = btn.nextElementSibling;
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    btn.textContent = 'Gekopieerd!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Kopieer'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg + ' gekopieerd';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+renderColors('cg-primary', COLORS.primary);
+renderColors('cg-functional', COLORS.functional);
+renderColors('cg-neutral', COLORS.neutral);
+renderTypo('type-display', TYPOGRAPHY.display);
+renderTypo('type-body', TYPOGRAPHY.body);
+renderSpacing();
+renderRadius();
+document.getElementById('pre-css').textContent      = CSS_ROOT;
+document.getElementById('pre-css-type').textContent = CSS_TYPE;
+document.getElementById('pre-css-btn').textContent  = CSS_BTN;
+document.getElementById('pre-css-form').textContent = CSS_FORM;
+document.getElementById('pre-tailwind').textContent = TW_CONFIG;
+</script>
+</body>
+</html>
