@@ -6,209 +6,365 @@
 <title>Mede in Zutphen — Design System</title>
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800&display=swap" rel="stylesheet">
+<!-- Phosphor Icons -->
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --color-donker:       #27351d;
-  --color-geel:         #fdc52f;
-  --color-groen:        #379850;
-  --color-blauw:        #3772ff;
-  --color-rood:         #fc511f;
-  --color-roze:         #f895c0;
-  --color-paars:        #8c60b9;
-  --color-lichtoranje:  #ffc288;
-  --color-donkeroranje: #c83d14;
-  --color-wit:          #ffffff;
-  --color-zand-5:       #f5f5ed;
-  --color-zand-10:      #f5f1e5;
-  --color-zand-25:      #d6d7cc;
-  --color-zand-50:      #9a958d;
-  --color-zwart-60:     #737372;
-  --color-zwart-80:     #50504f;
-  --color-zwart:        #151614;
-  --font:               'Switzer', system-ui, sans-serif;
-  --mono:               'SF Mono', 'Fira Code', monospace;
-  --shadow-1:           0 2px 8px rgba(21,22,20,0.08);
-  --shadow-2:           0 8px 32px rgba(21,22,20,0.10);
+  --white:    #ffffff;
+  --sand:     #f5f5ed;
+  --sand-10:  #f5f1e5;
+  --sand-25:  #d6d7cc;
+  --sand-50:  #9a958d;
+  --black-60: #737372;
+  --black-80: #50504f;
+  --black:    #151614;
+  --blue:     #3772ff;
+  --yellow:   #fdc52f;
+  --green:    #379850;
+  --red:      #fc511f;
+  --pink:     #f895c0;
+  --purple:   #8c60b9;
+
+  --space-4:4px; --space-8:8px; --space-12:12px; --space-16:16px;
+  --space-20:20px; --space-24:24px; --space-32:32px; --space-40:40px;
+  --space-60:60px; --space-80:80px; --space-120:120px;
+  --space-160:160px; --space-240:240px;
+
+  --radius-4:4px; --radius-8:8px; --radius-24:24px;
+  --radius-40:40px; --radius-64:64px;
+
+  --font: 'Switzer', system-ui, sans-serif;
+  --mono: 'SF Mono', 'Fira Code', monospace;
+  --shadow-1: 0 2px 8px rgba(21,22,20,0.08);
+  --shadow-2: 0 8px 32px rgba(21,22,20,0.10);
+  --shadow-elevation-1: 0 2px 8px rgba(21,22,20,0.08);
 }
 
-html { font-size: 16px; scroll-behavior: smooth; }
-body { font-family: var(--font); background: var(--color-zand-5); color: var(--color-zwart); min-height: 100vh; -webkit-font-smoothing: antialiased; }
-code { font-family: var(--mono); font-size: 13px; background: rgba(21,22,20,0.06); padding: 2px 6px; border-radius: 4px; }
+html { font-size:16px; scroll-behavior:smooth; }
+body { font-family:var(--font); background:var(--sand); color:var(--black); min-height:100vh; -webkit-font-smoothing:antialiased; }
+code { font-family:var(--mono); font-size:12.5px; background:rgba(21,22,20,0.06); padding:2px 6px; border-radius:4px; }
 
 /* Layout */
-.layout { display: flex; min-height: 100vh; }
+.layout { display:flex; min-height:100vh; }
 
 /* Sidebar */
-.sidebar { width: 240px; flex-shrink: 0; position: fixed; top: 0; left: 0; bottom: 0; background: var(--color-zwart); display: flex; flex-direction: column; padding: 32px 0; z-index: 100; overflow-y: auto; }
-.sidebar-logo { padding: 0 24px 28px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 20px; }
-.sidebar-logo-title { font-size: 14px; font-weight: 600; color: #fff; letter-spacing: -0.02em; line-height: 1.2; }
-.sidebar-logo-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 3px; letter-spacing: 0.04em; text-transform: uppercase; }
-.sidebar-badge { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; background: var(--color-geel); color: var(--color-donker); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 40px; letter-spacing: 0.02em; }
-.sidebar-dot { width: 5px; height: 5px; background: var(--color-donker); border-radius: 50%; }
-.nav-section { padding: 0 16px; }
-.nav-label { font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 8px; margin-bottom: 4px; margin-top: 20px; display: block; }
-.nav-item { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 8px; color: rgba(255,255,255,0.5); font-size: 13px; font-weight: 500; cursor: pointer; transition: background 0.15s, color 0.15s; border: none; background: none; width: 100%; text-align: left; }
-.nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.8); }
-.nav-item.active { background: rgba(255,255,255,0.1); color: #fff; }
-.nav-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-.sidebar-footer { margin-top: auto; padding: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 11px; color: rgba(255,255,255,0.2); line-height: 1.6; }
+.sidebar { width:236px; flex-shrink:0; position:fixed; top:0; left:0; bottom:0; background:var(--black); display:flex; flex-direction:column; padding:28px 0; z-index:100; overflow-y:auto; }
+.sidebar-logo { padding:0 22px 24px; border-bottom:1px solid rgba(255,255,255,0.07); margin-bottom:16px; }
+.sidebar-logo-title { font-size:13.5px; font-weight:600; color:#fff; letter-spacing:-0.02em; line-height:1.3; }
+.sidebar-logo-sub { font-size:10px; color:rgba(255,255,255,0.3); margin-top:3px; letter-spacing:0.05em; text-transform:uppercase; }
+.sidebar-badge { display:inline-flex; align-items:center; gap:4px; margin-top:10px; background:var(--yellow); color:#27351d; font-size:10px; font-weight:700; padding:3px 8px; border-radius:40px; letter-spacing:0.02em; }
+.sidebar-dot { width:5px; height:5px; background:#27351d; border-radius:50%; }
+.nav-wrap { padding:0 12px; }
+.nav-label { font-size:10px; font-weight:600; color:rgba(255,255,255,0.22); letter-spacing:0.08em; text-transform:uppercase; padding:0 8px; margin-bottom:3px; margin-top:18px; display:block; }
+.nav-item { display:flex; align-items:center; gap:9px; padding:6.5px 8px; border-radius:7px; color:rgba(255,255,255,0.46); font-size:12.5px; font-weight:500; cursor:pointer; transition:background 0.12s, color 0.12s; border:none; background:none; width:100%; text-align:left; }
+.nav-item:hover { background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.78); }
+.nav-item.active { background:rgba(255,255,255,0.1); color:#fff; }
+.nav-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+.sidebar-footer { margin-top:auto; padding:20px 22px; border-top:1px solid rgba(255,255,255,0.07); font-size:10.5px; color:rgba(255,255,255,0.18); line-height:1.65; }
 
 /* Main */
-.main { margin-left: 240px; flex: 1; padding: 60px; max-width: 1080px; }
-.section { display: none; }
-.section.active { display: block; }
+.main { margin-left:236px; flex:1; padding:56px 60px; }
+.section { display:none; }
+.section.active { display:block; }
 
 /* Page header */
-.page-header { margin-bottom: 48px; padding-bottom: 28px; border-bottom: 1px solid rgba(21,22,20,0.08); }
-.page-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-zand-50); margin-bottom: 8px; }
-.page-title { font-size: 40px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
-.page-desc { font-size: 15px; color: var(--color-zwart-60); margin-top: 8px; line-height: 1.6; max-width: 520px; }
+.page-header { margin-bottom:44px; padding-bottom:26px; border-bottom:1px solid rgba(21,22,20,0.08); }
+.page-eyebrow { font-size:10.5px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--sand-50); margin-bottom:7px; }
+.page-title { font-size:38px; font-weight:600; letter-spacing:-0.03em; line-height:1.1; }
+.page-desc { font-size:14.5px; color:var(--black-60); margin-top:8px; line-height:1.65; max-width:500px; }
 
 /* Token group */
-.token-group { margin-bottom: 44px; }
-.token-group-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-zand-50); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-.token-group-title::after { content: ''; flex: 1; height: 1px; background: rgba(21,22,20,0.08); }
+.token-group { margin-bottom:40px; }
+.tg-title { font-size:10.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--sand-50); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+.tg-title::after { content:''; flex:1; height:1px; background:rgba(21,22,20,0.08); }
 
 /* Color grid */
-.color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(136px, 1fr)); gap: 10px; }
-.color-card { border-radius: 12px; overflow: hidden; background: #fff; box-shadow: var(--shadow-1); cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
-.color-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
-.color-card:active { transform: scale(0.97); }
-.color-swatch { height: 68px; position: relative; }
-.color-copy-hint { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.15); opacity: 0; transition: opacity 0.15s; font-size: 11px; font-weight: 600; color: #fff; letter-spacing: 0.04em; }
-.color-card:hover .color-copy-hint { opacity: 1; }
-.color-info { padding: 10px 12px 12px; }
-.color-name { font-size: 12px; font-weight: 600; color: var(--color-zwart); letter-spacing: -0.01em; }
-.color-hex { font-size: 11px; color: var(--color-zwart-60); font-family: var(--mono); margin-top: 2px; }
+.color-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(128px,1fr)); gap:9px; }
+.color-card { border-radius:11px; overflow:hidden; background:#fff; box-shadow:var(--shadow-1); cursor:pointer; transition:transform 0.13s, box-shadow 0.13s; }
+.color-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-2); }
+.color-card:active { transform:scale(0.97); }
+.color-swatch { height:60px; position:relative; }
+.copy-hint { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.16); opacity:0; transition:opacity 0.13s; font-size:10.5px; font-weight:600; color:#fff; letter-spacing:0.04em; }
+.color-card:hover .copy-hint { opacity:1; }
+.color-info { padding:8px 11px 11px; }
+.color-name { font-size:11.5px; font-weight:600; color:var(--black); letter-spacing:-0.01em; }
+.color-hex { font-size:10.5px; color:var(--black-60); font-family:var(--mono); margin-top:1px; }
 
 /* Typography */
-.type-row { display: grid; grid-template-columns: 180px 1fr 180px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(21,22,20,0.06); gap: 24px; }
-.type-row:last-child { border-bottom: none; }
-.type-label { font-size: 11px; font-weight: 600; color: var(--color-zwart-60); font-family: var(--mono); }
-.type-preview { font-family: var(--font); color: var(--color-zwart); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.type-meta { font-size: 11px; color: var(--color-zand-50); font-family: var(--mono); text-align: right; line-height: 1.7; }
+.type-row { display:grid; grid-template-columns:175px 1fr 175px; align-items:center; padding:13px 0; border-bottom:1px solid rgba(21,22,20,0.06); gap:20px; }
+.type-row:last-child { border-bottom:none; }
+.type-label { font-size:10.5px; font-weight:600; color:var(--black-60); font-family:var(--mono); }
+.type-preview { font-family:var(--font); color:var(--black); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.type-meta { font-size:10.5px; color:var(--sand-50); font-family:var(--mono); text-align:right; line-height:1.75; }
 
 /* Spacing */
-.spacing-list { display: flex; flex-direction: column; gap: 8px; }
-.spacing-row { display: flex; align-items: center; gap: 16px; padding: 10px 16px; background: #fff; border-radius: 10px; box-shadow: var(--shadow-1); }
-.spacing-label { font-size: 12px; font-weight: 600; font-family: var(--mono); min-width: 52px; color: var(--color-zwart); }
-.spacing-bar-wrap { flex: 1; max-width: 300px; }
-.spacing-bar { height: 6px; background: var(--color-donker); border-radius: 3px; opacity: 0.75; }
-.spacing-desc { font-size: 12px; color: var(--color-zwart-60); min-width: 120px; }
+.spacing-list { display:flex; flex-direction:column; gap:7px; }
+.spacing-row { display:flex; align-items:center; gap:14px; padding:9px 14px; background:#fff; border-radius:9px; box-shadow:var(--shadow-1); }
+.spacing-label { font-size:11.5px; font-weight:600; font-family:var(--mono); min-width:50px; color:var(--black); }
+.spacing-bar-wrap { flex:1; max-width:280px; }
+.spacing-bar { height:5px; background:var(--black); border-radius:3px; opacity:0.7; }
+.spacing-desc { font-size:11.5px; color:var(--black-60); min-width:110px; }
 
 /* Radius */
-.radius-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-.radius-card { background: #fff; box-shadow: var(--shadow-1); padding: 20px; display: flex; flex-direction: column; gap: 12px; border-radius: 12px; }
-.radius-preview { width: 52px; height: 52px; background: var(--color-donker); opacity: 0.85; }
-.radius-val { font-size: 13px; font-weight: 600; font-family: var(--mono); color: var(--color-zwart); }
-.radius-name { font-size: 11px; color: var(--color-zwart-60); margin-top: 1px; }
-.radius-desc-text { font-size: 11px; color: var(--color-zand-50); margin-top: 2px; }
+.radius-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(136px,1fr)); gap:9px; }
+.radius-card { background:#fff; box-shadow:var(--shadow-1); padding:18px; display:flex; flex-direction:column; gap:10px; border-radius:11px; }
+.radius-preview { width:48px; height:48px; background:var(--black); opacity:0.85; }
+.radius-val { font-size:12.5px; font-weight:600; font-family:var(--mono); color:var(--black); }
+.radius-name { font-size:10.5px; color:var(--black-60); margin-top:1px; }
+.radius-note { font-size:10.5px; color:var(--sand-50); margin-top:1px; }
 
-/* ─── BUTTONS ─── */
-.btn { font-family: var(--font); font-weight: 400; letter-spacing: -0.01em; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.15s, transform 0.1s; white-space: nowrap; text-decoration: none; line-height: 1; }
-.btn:hover { opacity: 0.85; }
-.btn:active { transform: scale(0.97); }
-.btn:disabled, .btn.is-disabled { opacity: 0.38; cursor: not-allowed; pointer-events: none; }
+/* ── BUTTONS ──
+   Font weight: Medium (500) per Figma — switzer-1
+*/
+.btn {
+  font-family:var(--font);
+  font-weight:500; /* Medium — switzer-1 */
+  letter-spacing:-0.01em;
+  border:none; cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  transition:opacity 0.13s, transform 0.1s;
+  white-space:nowrap; text-decoration:none; line-height:1;
+}
+.btn:hover { opacity:0.82; }
+.btn:active { transform:scale(0.97); }
+.btn.is-disabled, .btn:disabled { opacity:0.36; cursor:not-allowed; pointer-events:none; }
 
-/* Sizes */
-.btn-s { font-size: 16px; line-height: 24px; padding: 8px 16px;  height: 40px; }
-.btn-m { font-size: 17px; line-height: 28px; padding: 12px 20px; height: 52px; }
-.btn-l { font-size: 17px; line-height: 28px; padding: 16px 24px; height: 60px; }
+.btn-s { font-size:16px; line-height:24px; padding:8px 16px;  height:40px; }
+.btn-m { font-size:17px; line-height:28px; padding:12px 20px; height:52px; }
+.btn-l { font-size:17px; line-height:28px; padding:16px 24px; height:60px; }
 
-/* Shape */
-.btn-round  { border-radius: 40px; }
-.btn-square { border-radius: 8px; }
+.btn-icon-s { width:40px; height:40px; padding:0; border-radius:40px; font-size:18px; }
+.btn-icon-m { width:52px; height:52px; padding:0; border-radius:40px; font-size:20px; }
 
-/* Icon only */
-.btn-icon-s { width: 40px; height: 40px; padding: 0; border-radius: 40px; }
-.btn-icon-m { width: 52px; height: 52px; padding: 0; border-radius: 40px; }
+.btn-round  { border-radius:40px; }
+.btn-square { border-radius:8px; }
 
-/* Filled */
-.btn-primary   { background: var(--color-blauw);        color: #fff; }
-.btn-secondary { background: var(--color-zwart);        color: #fff; }
-.btn-dark      { background: var(--color-donker);       color: #fff; }
-.btn-alert     { background: var(--color-donkeroranje); color: #fff; }
-.btn-yellow    { background: var(--color-geel);         color: var(--color-donker); }
-.btn-green     { background: var(--color-groen);        color: #fff; }
+/* Filled — all colors */
+.btn-blue   { background:var(--blue);   color:#fff; }
+.btn-yellow { background:var(--yellow); color:#27351d; }
+.btn-green  { background:var(--green);  color:#fff; }
+.btn-red    { background:var(--red);    color:#fff; }
+.btn-pink   { background:var(--pink);   color:#27351d; }
+.btn-purple { background:var(--purple); color:#fff; }
+.btn-black  { background:var(--black);  color:#fff; }
 
 /* Ghost */
-.btn-ghost { background: transparent; color: var(--color-zwart); border: 1px solid var(--color-zand-25); }
-.btn-ghost:hover { background: rgba(21,22,20,0.04); opacity: 1; }
-.btn-ghost-dark { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
-.btn-ghost-dark:hover { background: rgba(255,255,255,0.08); opacity: 1; }
+.btn-ghost { background:transparent; color:var(--black); border:1px solid var(--sand-25); }
+.btn-ghost:hover { background:rgba(21,22,20,0.04); opacity:1; }
+.btn-ghost-dark { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.28); }
+.btn-ghost-dark:hover { background:rgba(255,255,255,0.07); opacity:1; }
 
-/* Demo */
-.btn-demo-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-zand-50); margin-bottom: 10px; }
-.btn-demo-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 20px; }
-.btn-demo-dark { background: var(--color-donker); border-radius: 16px; padding: 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 20px; }
+/* Demo helpers */
+.demo-label { font-size:10.5px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--sand-50); margin-bottom:9px; }
+.demo-row { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:16px; }
+.demo-dark { background:var(--black); border-radius:14px; padding:18px; display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:16px; }
 
-/* Spec table */
-.spec-table { width: 100%; border-collapse: collapse; }
-.spec-table th { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-zand-50); text-align: left; padding: 0 12px 10px; }
-.spec-table td { font-size: 13px; color: var(--color-zwart); padding: 10px 12px; border-top: 1px solid rgba(21,22,20,0.06); font-family: var(--mono); }
-.spec-table td:first-child { font-weight: 600; font-family: var(--font); }
-
-/* ─── FORM FIELDS ─── */
-.field { display: flex; flex-direction: column; gap: 6px; }
-.field-label { font-size: 14px; font-weight: 600; color: var(--color-zwart); display: flex; align-items: center; gap: 6px; letter-spacing: -0.01em; }
-.field-label-optional { font-size: 13px; font-weight: 400; color: var(--color-zwart-60); }
-.field-input { font-family: var(--font); font-size: 16px; font-weight: 400; color: var(--color-zwart); background: #fff; border: 1px solid var(--color-zand-25); border-radius: 8px; padding: 12px 16px; width: 100%; outline: none; transition: border-color 0.15s, box-shadow 0.15s; letter-spacing: -0.01em; -webkit-appearance: none; }
-.field-input::placeholder { color: var(--color-zand-50); }
-.field-input:hover:not(:disabled) { border-color: var(--color-zwart-60); }
-.field-input:focus { border-color: var(--color-zwart); box-shadow: 0 0 0 3px rgba(21,22,20,0.08); }
-.field-input--error { border-color: var(--color-rood); }
-.field-input--error:focus { box-shadow: 0 0 0 3px rgba(252,81,31,0.12); }
-.field-input:disabled { opacity: 0.4; cursor: not-allowed; background: var(--color-zand-5); }
-.field-subtext { font-size: 12px; color: var(--color-zwart-60); letter-spacing: -0.01em; }
-.field-subtext--error { color: var(--color-rood); }
-.field-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
-.field-select-wrap { position: relative; }
-.field-select-wrap select { padding-right: 40px; cursor: pointer; }
-.field-select-icon { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--color-zwart-60); }
-.field-search-wrap { position: relative; }
-.field-search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--color-zwart-60); pointer-events: none; }
-.field-input--search { padding-left: 42px; border-radius: 40px; }
+/* ── FORM FIELDS ── */
+.field { display:flex; flex-direction:column; gap:5px; }
+.field-label { font-size:14px; font-weight:600; color:var(--black); display:flex; align-items:center; gap:6px; letter-spacing:-0.01em; }
+.field-label-opt { font-size:12.5px; font-weight:400; color:var(--black-60); }
+.field-input {
+  font-family:var(--font); font-size:16px; font-weight:400; color:var(--black);
+  background:#fff; border:1px solid var(--sand-25); border-radius:8px;
+  padding:12px 16px; width:100%; outline:none;
+  transition:border-color 0.14s, box-shadow 0.14s; letter-spacing:-0.01em; -webkit-appearance:none;
+}
+.field-input::placeholder { color:var(--sand-50); }
+.field-input:hover:not(:disabled) { border-color:var(--black-60); }
+.field-input:focus { border-color:var(--black); box-shadow:0 0 0 3px rgba(21,22,20,0.08); }
+.field-input--error { border-color:var(--red); }
+.field-input--error:focus { box-shadow:0 0 0 3px rgba(252,81,31,0.12); }
+.field-input:disabled { opacity:0.4; cursor:not-allowed; background:var(--sand); }
+.field-subtext { font-size:11.5px; color:var(--black-60); letter-spacing:-0.01em; }
+.field-subtext--error { color:var(--red); }
+.field-textarea { resize:vertical; min-height:96px; line-height:1.6; }
+.field-select-wrap { position:relative; }
+.field-select-wrap select { padding-right:38px; cursor:pointer; }
+.select-icon { position:absolute; right:13px; top:50%; transform:translateY(-50%); pointer-events:none; color:var(--black-60); display:flex; }
 
 /* Checkbox */
-.checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 400; color: var(--color-zwart); cursor: pointer; letter-spacing: -0.01em; user-select: none; }
-.checkbox-input { display: none; }
-.checkbox-box { width: 18px; height: 18px; border: 1.5px solid var(--color-zand-25); border-radius: 4px; background: #fff; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: border-color 0.15s, background 0.15s; }
-.checkbox-input:checked + .checkbox-box { background: var(--color-zwart); border-color: var(--color-zwart); }
-.check-icon { display: none; }
-.checkbox-input:checked + .checkbox-box .check-icon { display: block; }
-.checkbox-group { display: flex; flex-direction: column; gap: 10px; }
+.checkbox-group { display:flex; flex-direction:column; gap:9px; }
+.checkbox-label { display:flex; align-items:center; gap:10px; font-size:15px; font-weight:400; color:var(--black); cursor:pointer; letter-spacing:-0.01em; user-select:none; }
+.checkbox-input { display:none; }
+.checkbox-box { width:18px; height:18px; border:1.5px solid var(--sand-25); border-radius:4px; background:#fff; flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:border-color 0.13s, background 0.13s; }
+.checkbox-input:checked + .checkbox-box { background:var(--black); border-color:var(--black); }
+.check-icon { display:none; }
+.checkbox-input:checked + .checkbox-box .check-icon { display:block; }
+
+/* ── CONTROLS ── */
+
+/* Filter (pill) */
+.filter-wrap { position:relative; display:inline-flex; align-items:center; }
+.filter-icon { position:absolute; left:13px; pointer-events:none; color:var(--black-60); display:flex; align-items:center; }
+.field-input--filter { padding-left:40px; border-radius:40px; width:auto; }
+
+/* Search bar — input flush against button, no gap, button inside border */
+.search-bar {
+  display:flex;
+  align-items:center;
+  background:#fff;
+  border:1px solid var(--sand-25);
+  border-radius:20px;
+  padding:6px 6px 6px 14px;
+  transition:border-color 0.14s, box-shadow 0.14s;
+  height:52px;
+  gap:0;
+}
+.search-bar:focus-within {
+  border-color:var(--black);
+  box-shadow:0 0 0 3px rgba(21,22,20,0.08);
+}
+.search-bar-icon {
+  padding:0 10px 0 0;
+  display:flex; align-items:center; flex-shrink:0;
+  color:var(--black-60);
+  font-size:18px;
+}
+.search-bar-input {
+  font-family:var(--font); font-size:16px; font-weight:400;
+  color:var(--black); background:transparent; border:none; outline:none;
+  flex:1; min-width:0; letter-spacing:-0.01em;
+}
+.search-bar-input::placeholder { color:var(--sand-50); }
+/* Button floats inside with 8px gap all around — border-radius 8px */
+.search-bar-btn {
+  flex-shrink:0;
+  font-family:var(--font); font-size:16px; font-weight:500;
+  background:var(--red); color:#fff;
+  border:none;
+  padding:0 20px;
+  height:100%;
+  cursor:pointer;
+  letter-spacing:-0.01em;
+  transition:opacity 0.13s;
+  display:flex; align-items:center;
+  border-radius:12px;
+}
+.search-bar-btn:hover { opacity:0.87; }
+
+/* Datepicker */
+.datepicker-wrap { position:relative; display:inline-flex; align-items:center; }
+.datepicker-input {
+  font-family:var(--font); font-size:16px; font-weight:400;
+  color:var(--black-60); background:#fff; border:1px solid var(--sand-25);
+  border-radius:8px; padding:12px 44px 12px 16px; outline:none;
+  width:280px; cursor:pointer;
+  transition:border-color 0.14s, box-shadow 0.14s; letter-spacing:-0.01em; -webkit-appearance:none;
+}
+.datepicker-input:focus { border-color:var(--black); box-shadow:0 0 0 3px rgba(21,22,20,0.08); }
+.datepicker-icon { position:absolute; right:13px; pointer-events:none; color:var(--black-60); display:flex; align-items:center; font-size:18px; }
+
+/* Increment */
+.increment { display:flex; align-items:center; gap:12px; }
+.increment-label { font-size:16px; font-weight:600; color:var(--black); letter-spacing:-0.01em; flex:1; }
+.increment-controls { display:flex; align-items:center; gap:8px; }
+.increment-btn {
+  width:32px; height:32px; border-radius:50%;
+  border:1px solid var(--sand-25); background:#fff;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:16px; color:var(--black);
+  transition:border-color 0.13s, background 0.13s;
+}
+.increment-btn:hover { border-color:var(--black-60); background:var(--sand); }
+.increment-btn:active { transform:scale(0.93); }
+.increment-val { font-size:16px; font-weight:600; min-width:20px; text-align:center; color:var(--black); letter-spacing:-0.01em; }
+
+/* Button group (segmented control)
+   — no internal padding, only outer rounding at the edges */
+.btn-group {
+  display:inline-flex;
+  background:#fff;
+  border:1px solid var(--sand-25);
+  border-radius:8px;
+  overflow:hidden; /* clips children so only outer corners show */
+}
+.btn-group-item {
+  font-family:var(--font); font-size:16px; font-weight:500; letter-spacing:-0.01em;
+  padding:12px 28px;
+  border:none; cursor:pointer;
+  transition:background 0.13s, color 0.13s;
+  color:var(--black-60); background:transparent;
+  border-radius:0; /* no per-item radius */
+  white-space:nowrap;
+}
+.btn-group-item:hover { color:var(--black); background:var(--sand); }
+.btn-group-item.active {
+  background:var(--black); color:#fff; font-weight:500;
+}
+/* Divider between items via box-shadow so border doesn't break layout */
+.btn-group-item + .btn-group-item { border-left:1px solid var(--sand-25); }
+.btn-group-item.active + .btn-group-item { border-left-color:transparent; }
+
+/* Switch — two circular buttons side by side
+   off = ×, on = ✓ — active state filled black */
+.switch-row { display:flex; align-items:center; gap:12px; }
+.switch-label-text { font-size:16px; font-weight:600; color:var(--black); letter-spacing:-0.01em; }
+.switch { display:flex; align-items:center; gap:4px; }
+.switch-btn {
+  width:32px; height:32px; border-radius:50%;
+  border:1px solid var(--sand-25); background:#fff;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:16px; color:var(--black-60);
+  transition:background 0.13s, border-color 0.13s, color 0.13s;
+}
+.switch-btn:hover { border-color:var(--black-60); }
+.switch-btn.sw-active {
+  background:var(--black); border-color:var(--black); color:#fff;
+}
+
+/* Icons section */
+.icon-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(90px,1fr)); gap:8px; }
+.icon-card {
+  background:#fff; border-radius:10px; box-shadow:var(--shadow-1);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:16px 8px 12px; gap:8px; cursor:pointer;
+  transition:transform 0.12s, box-shadow 0.12s;
+}
+.icon-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-2); }
+.icon-card i { font-size:24px; color:var(--black); }
+.icon-card-name { font-size:9.5px; font-family:var(--mono); color:var(--black-60); text-align:center; word-break:break-all; }
+
+/* Spec table */
+.spec-table { width:100%; border-collapse:collapse; }
+.spec-table th { font-size:10.5px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--sand-50); text-align:left; padding:0 12px 9px; }
+.spec-table td { font-size:12.5px; color:var(--black); padding:9px 12px; border-top:1px solid rgba(21,22,20,0.06); font-family:var(--mono); }
+.spec-table td:first-child { font-weight:600; font-family:var(--font); }
 
 /* Code blocks */
-.code-wrap { position: relative; margin-bottom: 24px; }
-.code-label { font-size: 11px; font-weight: 600; color: var(--color-zand-50); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
-pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; padding: 24px 28px; font-size: 12.5px; line-height: 1.7; overflow-x: auto; font-family: var(--mono); box-shadow: var(--shadow-2); white-space: pre; }
-.copy-btn { position: absolute; top: 36px; right: 12px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 600; font-family: var(--font); padding: 5px 12px; border-radius: 6px; cursor: pointer; letter-spacing: 0.02em; transition: background 0.15s, color 0.15s; }
-.copy-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
-.copy-btn.copied { color: #7ec89a; border-color: rgba(126,200,154,0.3); }
+.code-wrap { position:relative; margin-bottom:22px; }
+.code-label { font-size:10.5px; font-weight:600; color:var(--sand-50); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:7px; }
+pre { background:var(--black); color:#e5e3de; border-radius:11px; padding:22px 26px; font-size:12px; line-height:1.72; overflow-x:auto; font-family:var(--mono); box-shadow:var(--shadow-2); white-space:pre; }
+.copy-btn { position:absolute; top:34px; right:11px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.55); font-size:10.5px; font-weight:600; font-family:var(--font); padding:4px 11px; border-radius:5px; cursor:pointer; letter-spacing:0.02em; transition:background 0.13s, color 0.13s; }
+.copy-btn:hover { background:rgba(255,255,255,0.14); color:#fff; }
+.copy-btn.copied { color:#7ec89a; border-color:rgba(126,200,154,0.3); }
 
 /* Shadow demo */
-.shadow-cards { display: flex; gap: 20px; flex-wrap: wrap; }
-.shadow-card { background: #fff; border-radius: 16px; padding: 24px 32px; }
-.shadow-card-label { font-size: 13px; font-weight: 500; color: var(--color-zwart); margin-bottom: 6px; }
-.shadow-card-value { font-size: 11px; font-family: var(--mono); color: var(--color-zand-50); line-height: 1.7; }
+.shadow-cards { display:flex; gap:16px; flex-wrap:wrap; }
+.shadow-card { background:#fff; border-radius:14px; padding:22px 28px; }
+.shadow-card-title { font-size:13px; font-weight:500; color:var(--black); margin-bottom:5px; }
+.shadow-card-val { font-size:10.5px; font-family:var(--mono); color:var(--sand-50); line-height:1.7; }
 
 /* Toast */
-.toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(8px); background: var(--color-donker); color: #fff; font-size: 13px; font-weight: 500; padding: 10px 20px; border-radius: 40px; box-shadow: var(--shadow-2); opacity: 0; transition: opacity 0.2s, transform 0.2s; pointer-events: none; z-index: 999; white-space: nowrap; }
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast { position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(8px); background:#27351d; color:#fff; font-size:12.5px; font-weight:500; padding:9px 18px; border-radius:40px; box-shadow:var(--shadow-2); opacity:0; transition:opacity 0.18s, transform 0.18s; pointer-events:none; z-index:999; white-space:nowrap; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
 /* Animations */
-@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.section.active > * { animation: fadeUp 0.28s ease both; }
-.section.active > *:nth-child(2) { animation-delay: 0.04s; }
-.section.active > *:nth-child(3) { animation-delay: 0.08s; }
-.section.active > *:nth-child(4) { animation-delay: 0.12s; }
-.section.active > *:nth-child(5) { animation-delay: 0.16s; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(9px); } to { opacity:1; transform:translateY(0); } }
+.section.active > * { animation:fadeUp 0.26s ease both; }
+.section.active > *:nth-child(2) { animation-delay:0.04s; }
+.section.active > *:nth-child(3) { animation-delay:0.08s; }
+.section.active > *:nth-child(4) { animation-delay:0.12s; }
+.section.active > *:nth-child(5) { animation-delay:0.15s; }
+.section.active > *:nth-child(6) { animation-delay:0.18s; }
 
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--color-zand-25); border-radius: 3px; }
+::-webkit-scrollbar { width:5px; height:5px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--sand-25); border-radius:3px; }
+
+.comp-demo-label { font-size:10.5px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--sand-50); margin-bottom:10px; }
+strong { font-weight:600; }
 </style>
 </head>
 <body>
@@ -218,9 +374,10 @@ pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; paddi
 <aside class="sidebar">
   <div class="sidebar-logo">
     <div class="sidebar-logo-title">Mede in Zutphen</div>
-    <div class="sidebar-logo-sub">Design System v1.0</div>
+    <div class="sidebar-logo-sub">Design System</div>
+    
   </div>
-  <div class="nav-section">
+  <div class="nav-wrap">
     <span class="nav-label">Tokens</span>
     <button class="nav-item active" onclick="nav('colors',this)"><span class="nav-dot" style="background:#fdc52f"></span>Kleuren</button>
     <button class="nav-item" onclick="nav('typography',this)"><span class="nav-dot" style="background:#3772ff"></span>Typografie</button>
@@ -230,10 +387,13 @@ pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; paddi
     <span class="nav-label">Componenten</span>
     <button class="nav-item" onclick="nav('buttons',this)"><span class="nav-dot" style="background:#fc511f"></span>Buttons</button>
     <button class="nav-item" onclick="nav('forms',this)"><span class="nav-dot" style="background:#d6d7cc"></span>Form fields</button>
+    <button class="nav-item" onclick="nav('controls',this)"><span class="nav-dot" style="background:#fdc52f"></span>Controls</button>
+    <button class="nav-item" onclick="nav('icons',this)"><span class="nav-dot" style="background:#3772ff"></span>Icons</button>
     <span class="nav-label">Code</span>
     <button class="nav-item" onclick="nav('css',this)"><span class="nav-dot" style="background:#f895c0"></span>CSS variabelen</button>
     <button class="nav-item" onclick="nav('tailwind',this)"><span class="nav-dot" style="background:#ffc288"></span>Tailwind config</button>
   </div>
+  
 </aside>
 
 <!-- ═══ MAIN ═══ -->
@@ -246,9 +406,8 @@ pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; paddi
     <h1 class="page-title">Kleuren</h1>
     <p class="page-desc">Klik op een kleur om de hex-waarde naar je clipboard te kopiëren.</p>
   </div>
-  <div class="token-group"><div class="token-group-title">Primair</div><div class="color-grid" id="cg-primary"></div></div>
-  <div class="token-group"><div class="token-group-title">Functioneel</div><div class="color-grid" id="cg-functional"></div></div>
-  <div class="token-group"><div class="token-group-title">Neutraal &amp; Zand</div><div class="color-grid" id="cg-neutral"></div></div>
+  <div class="token-group"><div class="tg-title">Kleuren</div><div class="color-grid" id="cg-colors"></div></div>
+  <div class="token-group"><div class="tg-title">Neutraal &amp; Zand</div><div class="color-grid" id="cg-neutral"></div></div>
 </div>
 
 <!-- TYPOGRAPHY -->
@@ -256,10 +415,10 @@ pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; paddi
   <div class="page-header">
     <div class="page-eyebrow">Tokens</div>
     <h1 class="page-title">Typografie</h1>
-    <p class="page-desc">Switzer — laden via <code>@fontsource/switzer</code> (npm) of Fontshare CDN.</p>
+    <p class="page-desc">Switzer — laden via <code>@fontsource/switzer</code> of <code>api.fontshare.com</code>.</p>
   </div>
-  <div class="token-group"><div class="token-group-title">Display &amp; Headings</div><div id="type-display"></div></div>
-  <div class="token-group"><div class="token-group-title">Body &amp; Caption</div><div id="type-body"></div></div>
+  <div class="token-group"><div class="tg-title">Display &amp; Headings</div><div id="type-display"></div></div>
+  <div class="token-group"><div class="tg-title">Body &amp; Caption</div><div id="type-body"></div></div>
 </div>
 
 <!-- SPACING -->
@@ -267,9 +426,9 @@ pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; paddi
   <div class="page-header">
     <div class="page-eyebrow">Tokens</div>
     <h1 class="page-title">Spacing</h1>
-    <p class="page-desc">Gebruik als <code>--space-*</code> CSS variabelen of Tailwind spacing utilities.</p>
+    <p class="page-desc">Gebruik als <code>--space-*</code> CSS variabelen of Tailwind spacing scale.</p>
   </div>
-  <div class="token-group"><div class="token-group-title">Schaal</div><div class="spacing-list" id="spacing-list"></div></div>
+  <div class="token-group"><div class="tg-title">Schaal</div><div class="spacing-list" id="spacing-list"></div></div>
 </div>
 
 <!-- RADIUS -->
@@ -279,7 +438,7 @@ pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; paddi
     <h1 class="page-title">Border radius</h1>
     <p class="page-desc">Van scherpe navigatie-elementen tot grote achtergrondvormen.</p>
   </div>
-  <div class="token-group"><div class="token-group-title">Stappen</div><div class="radius-grid" id="radius-grid"></div></div>
+  <div class="token-group"><div class="tg-title">Stappen</div><div class="radius-grid" id="radius-grid"></div></div>
 </div>
 
 <!-- SHADOWS -->
@@ -290,11 +449,11 @@ pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; paddi
     <p class="page-desc">Subtiele diepte voor kaarten en overlays.</p>
   </div>
   <div class="token-group">
-    <div class="token-group-title">Elevation</div>
+    <div class="tg-title">Elevation</div>
     <div class="shadow-cards">
       <div class="shadow-card" style="box-shadow:0 2px 8px rgba(21,22,20,0.08)">
-        <div class="shadow-card-label">Elevation 1</div>
-        <div class="shadow-card-value">0 2px 8px rgba(21,22,20,.08)<br>CSS: var(--shadow-elevation-1)</div>
+        <div class="shadow-card-title">Elevation 1</div>
+        <div class="shadow-card-val">0 2px 8px rgba(21,22,20,.08)<br>var(--shadow-elevation-1)</div>
       </div>
     </div>
   </div>
@@ -305,129 +464,93 @@ pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; paddi
   <div class="page-header">
     <div class="page-eyebrow">Componenten</div>
     <h1 class="page-title">Buttons</h1>
-    <p class="page-desc">Twee shapes: <strong>Round</strong> (40px) en <strong>Square</strong> (8px). Drie maten: S · M · L. Filled, ghost, en icon-only varianten.</p>
+    <p class="page-desc">Twee shapes: <strong>Round</strong> (40px) en <strong>Square</strong> (8px). Drie maten: S · M · L. Font weight: <strong>Medium (500)</strong>.</p>
   </div>
 
-  <!-- Filled Round -->
   <div class="token-group">
-    <div class="token-group-title">Filled — Round</div>
-    <div class="btn-demo-label">Primary · alle maten</div>
-    <div class="btn-demo-row">
-      <button class="btn btn-s btn-round btn-primary">Ontdekken</button>
-      <button class="btn btn-m btn-round btn-primary">Ontdekken</button>
-      <button class="btn btn-l btn-round btn-primary">Ontdekken</button>
-      <button class="btn btn-m btn-round btn-primary is-disabled">Disabled</button>
-    </div>
-    <div class="btn-demo-label">Overige kleuren (M)</div>
-    <div class="btn-demo-row">
-      <button class="btn btn-m btn-round btn-secondary">Secondary</button>
-      <button class="btn btn-m btn-round btn-alert">Alert</button>
+    <div class="tg-title">Filled — Round · alle kleuren</div>
+    <div class="demo-row">
+      <button class="btn btn-m btn-round btn-blue">Blue</button>
       <button class="btn btn-m btn-round btn-yellow">Yellow</button>
       <button class="btn btn-m btn-round btn-green">Green</button>
-      <button class="btn btn-m btn-round btn-dark">Dark</button>
+      <button class="btn btn-m btn-round btn-red">Red / Alert</button>
+      <button class="btn btn-m btn-round btn-pink">Pink</button>
+      <button class="btn btn-m btn-round btn-purple">Purple</button>
+      <button class="btn btn-m btn-round btn-black">Black</button>
+    </div>
+    <div class="demo-label">Maten (Blue)</div>
+    <div class="demo-row">
+      <button class="btn btn-s btn-round btn-blue">Ontdekken</button>
+      <button class="btn btn-m btn-round btn-blue">Ontdekken</button>
+      <button class="btn btn-l btn-round btn-blue">Ontdekken</button>
+      <button class="btn btn-m btn-round btn-blue is-disabled">Disabled</button>
     </div>
   </div>
 
-  <!-- Filled Square -->
   <div class="token-group">
-    <div class="token-group-title">Filled — Square</div>
-    <div class="btn-demo-row">
-      <button class="btn btn-s btn-square btn-secondary">Ontdekken</button>
-      <button class="btn btn-m btn-square btn-secondary">Ontdekken</button>
-      <button class="btn btn-l btn-square btn-secondary">Ontdekken</button>
-    </div>
-    <div class="btn-demo-row">
-      <button class="btn btn-m btn-square btn-primary">Primary</button>
-      <button class="btn btn-m btn-square btn-alert">Alert</button>
+    <div class="tg-title">Filled — Square · alle kleuren</div>
+    <div class="demo-row">
+      <button class="btn btn-m btn-square btn-blue">Blue</button>
       <button class="btn btn-m btn-square btn-yellow">Yellow</button>
       <button class="btn btn-m btn-square btn-green">Green</button>
+      <button class="btn btn-m btn-square btn-red">Red / Alert</button>
+      <button class="btn btn-m btn-square btn-pink">Pink</button>
+      <button class="btn btn-m btn-square btn-purple">Purple</button>
+      <button class="btn btn-m btn-square btn-black">Black</button>
+    </div>
+    <div class="demo-label">Maten (Black)</div>
+    <div class="demo-row">
+      <button class="btn btn-s btn-square btn-black">Ontdekken</button>
+      <button class="btn btn-m btn-square btn-black">Ontdekken</button>
+      <button class="btn btn-l btn-square btn-black">Ontdekken</button>
     </div>
   </div>
 
-  <!-- Ghost -->
   <div class="token-group">
-    <div class="token-group-title">Ghost (border only)</div>
-    <div class="btn-demo-label">Op lichte achtergrond — Round</div>
-    <div class="btn-demo-row">
+    <div class="tg-title">Ghost (border only)</div>
+    <div class="demo-label">Op lichte achtergrond</div>
+    <div class="demo-row">
       <button class="btn btn-s btn-round btn-ghost">Ontdekken</button>
       <button class="btn btn-m btn-round btn-ghost">Ontdekken</button>
       <button class="btn btn-l btn-round btn-ghost">Ontdekken</button>
     </div>
-    <div class="btn-demo-label">Op donkere achtergrond</div>
-    <div class="btn-demo-dark">
-      <button class="btn btn-s btn-round btn-ghost-dark">Ontdekken</button>
+    <div class="demo-label">Op donkere achtergrond</div>
+    <div class="demo-dark">
       <button class="btn btn-m btn-round btn-ghost-dark">Ontdekken</button>
-      <button class="btn btn-l btn-round btn-ghost-dark">Ontdekken</button>
-    </div>
-    <div class="btn-demo-label">Square</div>
-    <div class="btn-demo-row">
-      <button class="btn btn-s btn-square btn-ghost">Ontdekken</button>
-      <button class="btn btn-m btn-square btn-ghost">Ontdekken</button>
-      <button class="btn btn-l btn-square btn-ghost">Ontdekken</button>
+      <button class="btn btn-m btn-square btn-ghost-dark">Ontdekken</button>
     </div>
   </div>
 
-  <!-- With icon -->
   <div class="token-group">
-    <div class="token-group-title">Met icon (links)</div>
-    <div class="btn-demo-row">
-      <button class="btn btn-s btn-round btn-ghost">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-        Ontdekken
-      </button>
-      <button class="btn btn-m btn-round btn-ghost">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-        Voorbeeld
-      </button>
-      <button class="btn btn-l btn-round btn-ghost">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-        Ontdekken
-      </button>
-    </div>
-    <div class="btn-demo-row">
-      <button class="btn btn-m btn-round btn-primary">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Ontdekken
-      </button>
-      <button class="btn btn-m btn-square btn-secondary">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        Zoeken
-      </button>
+    <div class="tg-title">Met Phosphor icon</div>
+    <div class="demo-row">
+      <button class="btn btn-m btn-round btn-ghost"><i class="ph ph-eye"></i> Ontdekken</button>
+      <button class="btn btn-m btn-round btn-ghost"><i class="ph ph-arrow-right"></i> Ontdekken</button>
+      <button class="btn btn-m btn-round btn-blue"><i class="ph ph-magnifying-glass"></i> Zoeken</button>
+      <button class="btn btn-m btn-square btn-black"><i class="ph ph-plus"></i> Toevoegen</button>
     </div>
   </div>
 
-  <!-- Icon only -->
   <div class="token-group">
-    <div class="token-group-title">Icon only</div>
-    <div class="btn-demo-row">
-      <button class="btn btn-icon-s btn-ghost">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-      <button class="btn btn-icon-m btn-ghost">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-      <button class="btn btn-icon-s btn-secondary">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-      </button>
-      <button class="btn btn-icon-s btn-ghost" style="color:var(--color-zwart-60)">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-      <button class="btn btn-icon-m btn-primary">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
+    <div class="tg-title">Icon only</div>
+    <div class="demo-row">
+      <button class="btn btn-icon-s btn-ghost"><i class="ph ph-arrow-right"></i></button>
+      <button class="btn btn-icon-m btn-ghost"><i class="ph ph-arrow-right"></i></button>
+      <button class="btn btn-icon-s btn-black"><i class="ph ph-check"></i></button>
+      <button class="btn btn-icon-s btn-ghost" style="color:var(--black-60)"><i class="ph ph-x"></i></button>
+      <button class="btn btn-icon-m btn-blue"><i class="ph ph-magnifying-glass"></i></button>
     </div>
   </div>
 
-  <!-- Specs -->
   <div class="token-group">
-    <div class="token-group-title">Specificaties</div>
+    <div class="tg-title">Specificaties</div>
     <table class="spec-table">
-      <thead><tr><th>Maat</th><th>Hoogte</th><th>Font size</th><th>Line height</th><th>Padding H</th><th>Padding V</th></tr></thead>
+      <thead><tr><th>Maat</th><th>Hoogte</th><th>Font</th><th>Line-height</th><th>Padding H</th><th>Padding V</th></tr></thead>
       <tbody>
-        <tr><td>S</td><td>40px</td><td>16px</td><td>24px</td><td>16px</td><td>8px</td></tr>
-        <tr><td>M</td><td>52px</td><td>17px</td><td>28px</td><td>20px</td><td>12px</td></tr>
-        <tr><td>L</td><td>60px</td><td>17px</td><td>28px</td><td>24px</td><td>16px</td></tr>
-        <tr><td colspan="6" style="color:var(--color-zand-50);font-family:var(--font);font-size:12px">Font weight: 400 Regular · Icon gap: 8px · Ghost border: 1px solid var(--color-zand-25)</td></tr>
+        <tr><td>S</td><td>40px</td><td>16px / 500</td><td>24px</td><td>16px</td><td>8px</td></tr>
+        <tr><td>M</td><td>52px</td><td>17px / 500</td><td>28px</td><td>20px</td><td>12px</td></tr>
+        <tr><td>L</td><td>60px</td><td>17px / 500</td><td>28px</td><td>24px</td><td>16px</td></tr>
+        <tr><td colspan="6" style="color:var(--sand-50);font-family:var(--font);font-size:11.5px">Font weight: 500 Medium (switzer-1) · Icon gap: 8px · Ghost border: 1px solid --sand-25</td></tr>
       </tbody>
     </table>
   </div>
@@ -438,82 +561,54 @@ pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; paddi
   <div class="page-header">
     <div class="page-eyebrow">Componenten</div>
     <h1 class="page-title">Form fields</h1>
-    <p class="page-desc">Switzer Regular 16px · border-radius 8px · border 1px solid Zand-25. Alle interactieve states zijn hieronder gedemonstreerd.</p>
+    <p class="page-desc">Switzer Regular 16px · border-radius 8px · border 1px solid Sand-25.</p>
   </div>
 
-  <!-- Text input states -->
   <div class="token-group">
-    <div class="token-group-title">Text input — states</div>
-    <div style="max-width:480px;display:flex;flex-direction:column;gap:20px;">
+    <div class="tg-title">Text input — states</div>
+    <div style="max-width:460px;display:flex;flex-direction:column;gap:18px;">
       <div class="field">
-        <label class="field-label">Bericht <span class="field-label-optional">Optioneel</span></label>
+        <label class="field-label">Bericht <span class="field-label-opt">Optioneel</span></label>
         <input class="field-input" type="text" placeholder="Placeholder">
         <span class="field-subtext">Subtext</span>
       </div>
       <div class="field">
-        <label class="field-label">Bericht <span class="field-label-optional">Optioneel</span></label>
-        <input class="field-input" type="text" value="Ingevulde waarde" style="border-color:var(--color-zwart);box-shadow:0 0 0 3px rgba(21,22,20,0.08)">
+        <label class="field-label">Bericht <span class="field-label-opt">Optioneel</span></label>
+        <input class="field-input" type="text" value="Ingevulde waarde" style="border-color:var(--black);box-shadow:0 0 0 3px rgba(21,22,20,0.08)">
         <span class="field-subtext">Focus state</span>
       </div>
       <div class="field">
-        <label class="field-label">Bericht <span class="field-label-optional">Optioneel</span></label>
+        <label class="field-label">Bericht <span class="field-label-opt">Optioneel</span></label>
         <input class="field-input field-input--error" type="text" value="Ongeldig e-mailadres">
         <span class="field-subtext field-subtext--error">Dit veld is verplicht</span>
       </div>
       <div class="field">
-        <label class="field-label" style="opacity:.4">Bericht <span class="field-label-optional">Optioneel</span></label>
+        <label class="field-label" style="opacity:.4">Bericht <span class="field-label-opt">Optioneel</span></label>
         <input class="field-input" type="text" placeholder="Placeholder" disabled>
         <span class="field-subtext" style="opacity:.4">Disabled state</span>
       </div>
     </div>
   </div>
 
-  <!-- Select -->
   <div class="token-group">
-    <div class="token-group-title">Select / dropdown</div>
-    <div style="max-width:480px;">
+    <div class="tg-title">Select / dropdown</div>
+    <div style="max-width:460px;">
       <div class="field">
-        <label class="field-label">Bericht <span class="field-label-optional">Optioneel</span></label>
+        <label class="field-label">Bericht <span class="field-label-opt">Optioneel</span></label>
         <div class="field-select-wrap">
           <select class="field-input">
             <option value="" disabled selected>Placeholder</option>
-            <option>Optie 1</option>
-            <option>Optie 2</option>
-            <option>Optie 3</option>
+            <option>Optie 1</option><option>Optie 2</option><option>Optie 3</option>
           </select>
-          <span class="field-select-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+          <span class="select-icon"><i class="ph ph-caret-down"></i></span>
         </div>
         <span class="field-subtext">Subtext</span>
       </div>
     </div>
   </div>
 
-  <!-- Textarea -->
   <div class="token-group">
-    <div class="token-group-title">Textarea</div>
-    <div style="max-width:480px;">
-      <div class="field">
-        <label class="field-label">Bericht</label>
-        <textarea class="field-input field-textarea" placeholder="Schrijf hier je bericht..."></textarea>
-        <span class="field-subtext">Minimale hoogte 100px · resize: vertical</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Search -->
-  <div class="token-group">
-    <div class="token-group-title">Zoekbalk</div>
-    <div style="max-width:320px;">
-      <div class="field-search-wrap">
-        <span class="field-search-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
-        <input class="field-input field-input--search" type="search" placeholder="Zoeken">
-      </div>
-    </div>
-  </div>
-
-  <!-- Checkbox -->
-  <div class="token-group">
-    <div class="token-group-title">Checkbox</div>
+    <div class="tg-title">Checkbox</div>
     <div class="checkbox-group">
       <label class="checkbox-label">
         <input class="checkbox-input" type="checkbox">
@@ -525,32 +620,216 @@ pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; paddi
         <span class="checkbox-box"><svg class="check-icon" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5l2.5 2.5 4.5-4.5"/></svg></span>
         Maaltijden bezorgen
       </label>
-      <label class="checkbox-label" style="opacity:.38;pointer-events:none">
-        <input class="checkbox-input" type="checkbox" disabled>
-        <span class="checkbox-box"></span>
-        Disabled optie
-      </label>
+    </div>
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<div id="section-controls" class="section">
+  <div class="page-header">
+    <div class="page-eyebrow">Componenten</div>
+    <h1 class="page-title">Controls</h1>
+    <p class="page-desc">Filter, zoekbalk, datepicker, increment, button group en switch. Alle icons via Phosphor.</p>
+  </div>
+
+  <!-- Filter -->
+  <div class="token-group">
+    <div class="tg-title">Filter field</div>
+    <div class="comp-demo-label">Pill-input met zoekicon</div>
+    <div class="filter-wrap">
+      <span class="filter-icon"><i class="ph ph-magnifying-glass" style="font-size:16px"></i></span>
+      <input class="field-input field-input--filter" type="text" placeholder="Filter" style="width:220px">
+    </div>
+    <div style="margin-top:14px">
+      <table class="spec-table">
+        <thead><tr><th>Token</th><th>Waarde</th></tr></thead>
+        <tbody>
+          <tr><td>Border radius</td><td>40px (pill) · --radius-40</td></tr>
+          <tr><td>Icon</td><td>ph-magnifying-glass · links 13px</td></tr>
+          <tr><td>Padding left</td><td>40px (ruimte voor icon)</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <!-- Specs -->
+  <!-- Search bar -->
   <div class="token-group">
-    <div class="token-group-title">Specificaties</div>
-    <table class="spec-table">
-      <thead><tr><th>Token</th><th>Waarde</th><th>CSS var</th></tr></thead>
-      <tbody>
-        <tr><td>Border radius</td><td>8px</td><td>--radius-8</td></tr>
-        <tr><td>Border (default)</td><td>1px solid #d6d7cc</td><td>--color-zand-25</td></tr>
-        <tr><td>Border (focus)</td><td>1px solid #151614</td><td>--color-zwart</td></tr>
-        <tr><td>Focus ring</td><td>0 0 0 3px rgba(21,22,20,.08)</td><td>—</td></tr>
-        <tr><td>Border (error)</td><td>1px solid #fc511f</td><td>--color-rood</td></tr>
-        <tr><td>Font size</td><td>16px / Regular</td><td>--font-switzer</td></tr>
-        <tr><td>Padding</td><td>12px 16px</td><td>--space-12 / --space-16</td></tr>
-        <tr><td>Search radius</td><td>40px (pill)</td><td>--radius-40</td></tr>
-        <tr><td>Placeholder kleur</td><td>#9a958d</td><td>--color-zand-50</td></tr>
-      </tbody>
-    </table>
+    <div class="tg-title">Zoekbalk met button</div>
+    <div class="comp-demo-label">Button zit <em>in</em> het veld, flush rechts — geen ruimte eromheen</div>
+    <div style="max-width:460px">
+      <div class="search-bar">
+        <span class="search-bar-icon"><i class="ph ph-magnifying-glass"></i></span>
+        <input class="search-bar-input" type="text" placeholder="">
+        <button class="search-bar-btn">Zoeken</button>
+      </div>
+    </div>
+    <div style="margin-top:14px">
+      <table class="spec-table">
+        <thead><tr><th>Token</th><th>Waarde</th></tr></thead>
+        <tbody>
+          <tr><td>Container</td><td>border 1px solid --sand-25 · radius 8px · height 52px</td></tr>
+          <tr><td>Icon</td><td>ph-magnifying-glass · padding 14px links</td></tr>
+          <tr><td>Button</td><td>background --red · padding 0 22px · radius 0 7px 7px 0</td></tr>
+          <tr><td>Button font</td><td>16px / 500 Medium</td></tr>
+          <tr><td>Geen ruimte</td><td>button zit flush in de container, geen gap of padding om button</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+
+  <!-- Datepicker -->
+  <div class="token-group">
+    <div class="tg-title">Datepicker</div>
+    <div class="comp-demo-label">Input met kalender-icon rechts</div>
+    <div class="datepicker-wrap">
+      <input class="datepicker-input" type="text" placeholder="Kies één of meerdere dagen" readonly>
+      <span class="datepicker-icon"><i class="ph ph-calendar-blank"></i></span>
+    </div>
+    <div style="margin-top:14px">
+      <table class="spec-table">
+        <thead><tr><th>Token</th><th>Waarde</th></tr></thead>
+        <tbody>
+          <tr><td>Border radius</td><td>8px · --radius-8</td></tr>
+          <tr><td>Icon</td><td>ph-calendar-blank · right 13px</td></tr>
+          <tr><td>Placeholder kleur</td><td>--black-60</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Increment -->
+  <div class="token-group">
+    <div class="tg-title">Increment / stepper</div>
+    <div class="comp-demo-label">Numerieke waarde aanpassen</div>
+    <div style="max-width:340px">
+      <div class="increment">
+        <span class="increment-label">Hoeveel uur?</span>
+        <div class="increment-controls">
+          <button class="increment-btn" onclick="changeVal(-1)"><i class="ph ph-minus" style="font-size:14px"></i></button>
+          <span class="increment-val" id="inc-val">2</span>
+          <button class="increment-btn" onclick="changeVal(1)"><i class="ph ph-plus" style="font-size:14px"></i></button>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:14px">
+      <table class="spec-table">
+        <thead><tr><th>Token</th><th>Waarde</th></tr></thead>
+        <tbody>
+          <tr><td>Button grootte</td><td>32×32px · border-radius 50%</td></tr>
+          <tr><td>Icons</td><td>ph-minus · ph-plus · 14px</td></tr>
+          <tr><td>Border</td><td>1px solid --sand-25</td></tr>
+          <tr><td>Label font</td><td>16px / 600 Semibold</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Button group -->
+  <div class="token-group">
+    <div class="tg-title">Button group (segmented control)</div>
+    <div class="comp-demo-label">Geen padding in de container — rounding alleen aan de buitenranden</div>
+    <div class="btn-group" id="btn-group">
+      <button class="btn-group-item active" onclick="selectGroup(this)">Spullen</button>
+      <button class="btn-group-item" onclick="selectGroup(this)">Dienst</button>
+      <button class="btn-group-item" onclick="selectGroup(this)">Ruimte</button>
+    </div>
+    <div style="margin-top:14px">
+      <table class="spec-table">
+        <thead><tr><th>Token</th><th>Waarde</th></tr></thead>
+        <tbody>
+          <tr><td>Container</td><td>border 1px solid --sand-25 · radius 8px · geen interne padding</td></tr>
+          <tr><td>Item</td><td>padding 12px 28px · border-radius 0 (geen per-item rounding)</td></tr>
+          <tr><td>Divider</td><td>border-left 1px solid --sand-25 tussen items</td></tr>
+          <tr><td>Active</td><td>background --black · color #fff · font 500</td></tr>
+          <tr><td>Rounding</td><td>overflow:hidden op container klipt hoeken automatisch</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Switch -->
+  <div class="token-group">
+    <div class="tg-title">Switch (on/off)</div>
+    <div class="comp-demo-label">Twee ronde knoppen — × uit / ✓ aan — klik om te wisselen</div>
+    <div class="switch-row">
+      <span class="switch-label-text">Zichtbaar?</span>
+      <div class="switch" id="switch-demo">
+        <!-- Off button: X -->
+        <button class="switch-btn" id="sw-off" onclick="setSwitch(false)">
+          <i class="ph ph-x" style="font-size:14px"></i>
+        </button>
+        <!-- On button: check — starts active -->
+        <button class="switch-btn sw-active" id="sw-on" onclick="setSwitch(true)">
+          <i class="ph ph-check" style="font-size:14px"></i>
+        </button>
+      </div>
+    </div>
+    <div style="margin-top:14px">
+      <table class="spec-table">
+        <thead><tr><th>Token</th><th>Waarde</th></tr></thead>
+        <tbody>
+          <tr><td>Knop grootte</td><td>32×32px · border-radius 50%</td></tr>
+          <tr><td>Off (×)</td><td>bg #fff · border --sand-25 · icon ph-x · color --black-60</td></tr>
+          <tr><td>On (✓)</td><td>bg --black · border --black · icon ph-check · color #fff</td></tr>
+          <tr><td>Gap</td><td>4px tussen de twee knoppen</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ICONS -->
+<div id="section-icons" class="section">
+  <div class="page-header">
+    <div class="page-eyebrow">Componenten</div>
+    <h1 class="page-title">Icons</h1>
+    <p class="page-desc">Icons komen van <strong>Phosphor Icons</strong> — <code>phosphoricons.com</code>. Laden via CDN of npm pakket <code>@phosphor-icons/web</code>.</p>
+  </div>
+
+  <div class="token-group">
+    <div class="tg-title">Installatie</div>
+    <div class="code-wrap">
+      <div class="code-label">CDN (in &lt;head&gt;)</div>
+      <button class="copy-btn" onclick="copyPre(this)">Kopieer</button>
+      <pre>&lt;script src="https://unpkg.com/@phosphor-icons/web"&gt;&lt;/script&gt;</pre>
+    </div>
+    <div class="code-wrap">
+      <div class="code-label">NPM</div>
+      <button class="copy-btn" onclick="copyPre(this)">Kopieer</button>
+      <pre>npm install @phosphor-icons/web
+
+// In je entry file:
+import '@phosphor-icons/web';</pre>
+    </div>
+    <div class="code-wrap">
+      <div class="code-label">Gebruik in Blade / HTML</div>
+      <button class="copy-btn" onclick="copyPre(this)">Kopieer</button>
+      <pre>&lt;!-- Regular (default) --&gt;
+&lt;i class="ph ph-heart"&gt;&lt;/i&gt;
+
+&lt;!-- Bold --&gt;
+&lt;i class="ph-bold ph-heart"&gt;&lt;/i&gt;
+
+&lt;!-- Fill --&gt;
+&lt;i class="ph-fill ph-heart"&gt;&lt;/i&gt;
+
+&lt;!-- Grootte via font-size --&gt;
+&lt;i class="ph ph-heart" style="font-size: 24px"&gt;&lt;/i&gt;
+
+&lt;!-- In een button --&gt;
+&lt;button class="btn btn-m btn-round btn-blue"&gt;
+  &lt;i class="ph ph-arrow-right"&gt;&lt;/i&gt;
+  Ontdekken
+&lt;/button&gt;</pre>
+    </div>
+  </div>
+
+  <div class="token-group">
+    <div class="tg-title">Gebruikte icons in dit design system</div>
+    <div class="icon-grid" id="icon-grid"></div>
+  </div>
+
+
 </div>
 
 <!-- CSS -->
@@ -558,12 +837,12 @@ pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; paddi
   <div class="page-header">
     <div class="page-eyebrow">Code</div>
     <h1 class="page-title">CSS variabelen</h1>
-    <p class="page-desc">Plak in <code>resources/css/app.css</code>. Importeer Switzer bovenaan via Fontshare of npm.</p>
+    <p class="page-desc">Plak in <code>resources/css/app.css</code>.</p>
   </div>
   <div class="code-wrap"><div class="code-label">:root — alle tokens</div><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-css"></pre></div>
-  <div class="code-wrap"><div class="code-label">Typografie utility classes</div><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-css-type"></pre></div>
-  <div class="code-wrap"><div class="code-label">Button classes</div><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-css-btn"></pre></div>
-  <div class="code-wrap"><div class="code-label">Form field classes</div><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-css-form"></pre></div>
+  <div class="code-wrap"><div class="code-label">Typografie utility classes</div><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-type"></pre></div>
+  <div class="code-wrap"><div class="code-label">Button classes</div><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-btn"></pre></div>
+  <div class="code-wrap"><div class="code-label">Form &amp; control classes</div><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-form"></pre></div>
 </div>
 
 <!-- TAILWIND -->
@@ -571,9 +850,9 @@ pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; paddi
   <div class="page-header">
     <div class="page-eyebrow">Code</div>
     <h1 class="page-title">Tailwind config</h1>
-    <p class="page-desc">Drop-in <code>tailwind.config.js</code> voor een standaard Laravel + Vite setup.</p>
+    <p class="page-desc">Drop-in <code>tailwind.config.js</code> voor Laravel + Vite.</p>
   </div>
-  <div class="code-wrap"><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-tailwind"></pre></div>
+  <div class="code-wrap"><button class="copy-btn" onclick="copyPre(this)">Kopieer</button><pre id="pre-tw"></pre></div>
 </div>
 
 </main>
@@ -581,33 +860,29 @@ pre { background: var(--color-zwart); color: #e8e6e0; border-radius: 12px; paddi
 <div class="toast" id="toast"></div>
 
 <script>
+/* ── Data ── */
 const COLORS = {
-  primary: [
-    { name:'Donker',       hex:'#27351d' },
-    { name:'Geel',         hex:'#fdc52f' },
-  ],
-  functional: [
-    { name:'Blauw',        hex:'#3772ff' },
-    { name:'Groen',        hex:'#379850' },
-    { name:'Rood',         hex:'#fc511f' },
-    { name:'DonkerOranje', hex:'#c83d14' },
-    { name:'LichtOranje',  hex:'#ffc288' },
-    { name:'Roze',         hex:'#f895c0' },
-    { name:'Paars',        hex:'#8c60b9' },
+  all: [
+    { name:'Blue',   hex:'#3772ff' },
+    { name:'Yellow', hex:'#fdc52f' },
+    { name:'Green',  hex:'#379850' },
+    { name:'Red',    hex:'#fc511f' },
+    { name:'Pink',   hex:'#f895c0' },
+    { name:'Purple', hex:'#8c60b9' },
   ],
   neutral: [
-    { name:'Wit',      hex:'#ffffff' },
-    { name:'Zand 5',   hex:'#f5f5ed' },
-    { name:'Zand 10',  hex:'#f5f1e5' },
-    { name:'Zand 25',  hex:'#d6d7cc' },
-    { name:'Zand 50',  hex:'#9a958d' },
-    { name:'Zwart 60', hex:'#737372' },
-    { name:'Zwart 80', hex:'#50504f' },
-    { name:'Zwart',    hex:'#151614' },
+    { name:'White',    hex:'#ffffff' },
+    { name:'Sand',     hex:'#f5f5ed' },
+    { name:'Sand-10',  hex:'#f5f1e5' },
+    { name:'Sand-25',  hex:'#d6d7cc' },
+    { name:'Sand-50',  hex:'#9a958d' },
+    { name:'Black-60', hex:'#737372' },
+    { name:'Black-80', hex:'#50504f' },
+    { name:'Black',    hex:'#151614' },
   ]
 };
 
-const TYPOGRAPHY = {
+const TYPO = {
   display: [
     { label:'Display',      size:96, weight:600, lh:'96px',   ls:'-0.04em' },
     { label:'Display-em',   size:96, weight:800, lh:'96px',   ls:'-0.04em' },
@@ -637,29 +912,66 @@ const TYPOGRAPHY = {
 };
 
 const SPACING = [
-  { val:'4px', desc:'' }, { val:'8px', desc:'' }, { val:'12px', desc:'' },
-  { val:'16px', desc:'' }, { val:'20px', desc:'' }, { val:'24px', desc:'' },
-  { val:'32px', desc:'' }, { val:'40px', desc:'' }, { val:'60px', desc:'' },
-  { val:'80px', desc:'Top padding' }, { val:'120px', desc:'Tussen objecten' },
-  { val:'160px', desc:'' }, { val:'240px', desc:'Tussen secties' },
+  {v:'4px',d:''},{v:'8px',d:''},{v:'12px',d:''},{v:'16px',d:''},
+  {v:'20px',d:''},{v:'24px',d:''},{v:'32px',d:''},{v:'40px',d:''},
+  {v:'60px',d:''},{v:'80px',d:'Top padding'},{v:'120px',d:'Tussen objecten'},
+  {v:'160px',d:''},{v:'240px',d:'Tussen secties'},
 ];
 
 const RADIUS = [
-  { val:'4px',  name:'border-4',  desc:'' },
-  { val:'8px',  name:'border-8',  desc:'Navigatie-elementen' },
-  { val:'24px', name:'border-24', desc:'Medium cards' },
-  { val:'40px', name:'border-40', desc:'Grote cards & buttons' },
-  { val:'64px', name:'border-64', desc:'Achtergronden' },
+  {v:'4px', n:'border-4', d:''},
+  {v:'8px', n:'border-8', d:'Navigatie-elementen, inputs'},
+  {v:'24px',n:'border-24',d:'Medium cards'},
+  {v:'40px',n:'border-40',d:'Grote cards & buttons'},
+  {v:'64px',n:'border-64',d:'Achtergronden'},
 ];
 
+const ICONS = [
+  'ph-eye',
+  'ph-arrow-right',
+  'ph-caret-down',
+  'ph-plus',
+  'ph-minus',
+  'ph-check',
+  'ph-x',
+  'ph-calendar-blank',
+  'ph-list',
+  'ph-magnifying-glass',
+  'ph-eye-slash',
+  'ph-arrow-left',
+  'ph-arrow-up',
+  'ph-arrow-down',
+  'ph-caret-up',
+  'ph-caret-right',
+  'ph-caret-left',
+  'ph-user',
+  'ph-envelope',
+  'ph-phone',
+  'ph-map-pin',
+  'ph-house',
+  'ph-gear',
+  'ph-bell',
+  'ph-warning',
+  'ph-info',
+  'ph-pencil',
+  'ph-trash',
+  'ph-download',
+  'ph-upload',
+  'ph-share',
+  'ph-heart',
+  'ph-star',
+  'ph-funnel',
+  'ph-clock',
+];
+
+/* ── Render ── */
 function renderColors(id, items) {
   const g = document.getElementById(id);
   items.forEach(c => {
     const el = document.createElement('div');
     el.className = 'color-card';
-    el.title = `Klik om ${c.hex} te kopiëren`;
-    el.innerHTML = `<div class="color-swatch" style="background:${c.hex}"><div class="color-copy-hint">Kopieer</div></div><div class="color-info"><div class="color-name">${c.name}</div><div class="color-hex">${c.hex}</div></div>`;
-    el.onclick = () => { navigator.clipboard.writeText(c.hex); showToast(`${c.name} — ${c.hex}`); };
+    el.innerHTML = `<div class="color-swatch" style="background:${c.hex}"><div class="copy-hint">Kopieer</div></div><div class="color-info"><div class="color-name">${c.name}</div><div class="color-hex">${c.hex}</div></div>`;
+    el.onclick = () => { navigator.clipboard.writeText(c.hex); showToast(`${c.name} ${c.hex}`); };
     g.appendChild(el);
   });
 }
@@ -667,7 +979,7 @@ function renderColors(id, items) {
 function renderTypo(id, items) {
   const c = document.getElementById(id);
   items.forEach(t => {
-    const sz = Math.min(t.size, 34);
+    const sz = Math.min(t.size, 32);
     const row = document.createElement('div');
     row.className = 'type-row';
     row.innerHTML = `<div class="type-label">${t.label}</div><div class="type-preview" style="font-size:${sz}px;font-weight:${t.weight};line-height:1.2;letter-spacing:${t.ls}">${t.label}</div><div class="type-meta">${t.size}px · ${t.weight}<br>${t.lh} lh · ${t.ls}</div>`;
@@ -678,11 +990,11 @@ function renderTypo(id, items) {
 function renderSpacing() {
   const list = document.getElementById('spacing-list');
   SPACING.forEach(s => {
-    const px = parseInt(s.val);
-    const w = Math.max(Math.round((px / 240) * 300), 4);
+    const px = parseInt(s.v);
+    const w = Math.max(Math.round((px/240)*280),3);
     const row = document.createElement('div');
     row.className = 'spacing-row';
-    row.innerHTML = `<span class="spacing-label">${s.val}</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:${w}px"></div></div><span class="spacing-desc">${s.desc}</span>`;
+    row.innerHTML = `<span class="spacing-label">${s.v}</span><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:${w}px"></div></div><span class="spacing-desc">${s.d}</span>`;
     list.appendChild(row);
   });
 }
@@ -692,202 +1004,184 @@ function renderRadius() {
   RADIUS.forEach(r => {
     const card = document.createElement('div');
     card.className = 'radius-card';
-    card.innerHTML = `<div class="radius-preview" style="border-radius:${r.val}"></div><div><div class="radius-val">${r.val}</div><div class="radius-name">${r.name}</div>${r.desc?`<div class="radius-desc-text">${r.desc}</div>`:''}</div>`;
+    card.innerHTML = `<div class="radius-preview" style="border-radius:${r.v}"></div><div><div class="radius-val">${r.v}</div><div class="radius-name">${r.n}</div>${r.d?`<div class="radius-note">${r.d}</div>`:''}</div>`;
     g.appendChild(card);
   });
 }
 
+function renderIcons() {
+  const g = document.getElementById('icon-grid');
+  ICONS.forEach(name => {
+    const card = document.createElement('div');
+    card.className = 'icon-card';
+    card.title = `Klik om class te kopiëren`;
+    card.innerHTML = `<i class="ph ${name}"></i><span class="icon-card-name">${name}</span>`;
+    card.onclick = () => { navigator.clipboard.writeText(name); showToast(name); };
+    g.appendChild(card);
+  });
+}
+
+/* ── Code strings ── */
 const CSS_ROOT = `:root {
-  /* Kleuren — Primair */
-  --color-donker:       #27351d;
-  --color-geel:         #fdc52f;
+  /* Kleuren */
+  --blue:     #3772ff;
+  --yellow:   #fdc52f;
+  --green:    #379850;
+  --red:      #fc511f;
+  --pink:     #f895c0;
+  --purple:   #8c60b9;
 
-  /* Kleuren — Functioneel */
-  --color-blauw:        #3772ff;
-  --color-groen:        #379850;
-  --color-rood:         #fc511f;
-  --color-donkeroranje: #c83d14;
-  --color-lichtoranje:  #ffc288;
-  --color-roze:         #f895c0;
-  --color-paars:        #8c60b9;
-
-  /* Kleuren — Neutraal */
-  --color-wit:          #ffffff;
-  --color-zand-5:       #f5f5ed;
-  --color-zand-10:      #f5f1e5;
-  --color-zand-25:      #d6d7cc;
-  --color-zand-50:      #9a958d;
-  --color-zwart-60:     #737372;
-  --color-zwart-80:     #50504f;
-  --color-zwart:        #151614;
+  /* Neutraal */
+  --white:    #ffffff;
+  --sand:     #f5f5ed;
+  --sand-10:  #f5f1e5;
+  --sand-25:  #d6d7cc;
+  --sand-50:  #9a958d;
+  --black-60: #737372;
+  --black-80: #50504f;
+  --black:    #151614;
 
   /* Typografie */
-  --font-switzer: 'Switzer', system-ui, sans-serif;
+  --font: 'Switzer', system-ui, sans-serif;
 
   /* Spacing */
-  --space-4:   4px;   --space-8:   8px;   --space-12:  12px;
-  --space-16:  16px;  --space-20:  20px;  --space-24:  24px;
-  --space-32:  32px;  --space-40:  40px;  --space-60:  60px;
-  --space-80:  80px;  --space-120: 120px; --space-160: 160px;
-  --space-240: 240px;
+  --space-4:4px;   --space-8:8px;   --space-12:12px;  --space-16:16px;
+  --space-20:20px; --space-24:24px; --space-32:32px;  --space-40:40px;
+  --space-60:60px; --space-80:80px; --space-120:120px;
+  --space-160:160px; --space-240:240px;
 
   /* Border radius */
-  --radius-4:  4px;   /* scherp */
-  --radius-8:  8px;   /* navigatie-elementen, inputs */
-  --radius-24: 24px;  /* medium cards */
-  --radius-40: 40px;  /* grote cards, buttons round */
-  --radius-64: 64px;  /* achtergronden */
+  --radius-4:4px;   /* scherp */
+  --radius-8:8px;   /* inputs, navigatie */
+  --radius-24:24px; /* medium cards */
+  --radius-40:40px; /* grote cards, buttons round, pill inputs */
+  --radius-64:64px; /* achtergronden */
 
   /* Shadows */
   --shadow-elevation-1: 0 2px 8px rgba(21, 22, 20, 0.08);
 
-  /* Buttons */
+  /* Button hoogtes */
   --btn-height-s: 40px;
   --btn-height-m: 52px;
   --btn-height-l: 60px;
 }`;
 
-const CSS_TYPE = `/* Typografie utility classes — Switzer */
-.text-display    { font-family: var(--font-switzer); font-size: 96px; font-weight: 600; line-height: 96px;   letter-spacing: -0.04em; }
-.text-display-em { font-family: var(--font-switzer); font-size: 96px; font-weight: 800; line-height: 96px;   letter-spacing: -0.04em; }
-.text-h1         { font-family: var(--font-switzer); font-size: 66px; font-weight: 600; line-height: 66px;   letter-spacing: -0.03em; }
-.text-h1-em      { font-family: var(--font-switzer); font-size: 66px; font-weight: 700; line-height: 66px;   letter-spacing: -0.03em; }
-.text-h2         { font-family: var(--font-switzer); font-size: 54px; font-weight: 600; line-height: 54px;   letter-spacing: -0.02em; }
-.text-h2-em      { font-family: var(--font-switzer); font-size: 54px; font-weight: 700; line-height: 54px;   letter-spacing: -0.02em; }
-.text-h3         { font-family: var(--font-switzer); font-size: 36px; font-weight: 500; line-height: 43px;   letter-spacing: -0.02em; }
-.text-h3-em      { font-family: var(--font-switzer); font-size: 36px; font-weight: 600; line-height: 43px;   letter-spacing: -0.02em; }
-.text-h4         { font-family: var(--font-switzer); font-size: 29px; font-weight: 500; line-height: 37px;   letter-spacing: -0.02em; }
-.text-h4-em      { font-family: var(--font-switzer); font-size: 29px; font-weight: 600; line-height: 37px;   letter-spacing: -0.02em; }
-.text-h5         { font-family: var(--font-switzer); font-size: 24px; font-weight: 500; line-height: 32px;   letter-spacing: -0.01em; }
-.text-h5-em      { font-family: var(--font-switzer); font-size: 24px; font-weight: 600; line-height: 32px;   letter-spacing: -0.01em; }
-.text-h6         { font-family: var(--font-switzer); font-size: 21px; font-weight: 400; line-height: 27px;   letter-spacing: -0.01em; }
-.text-h6-em      { font-family: var(--font-switzer); font-size: 21px; font-weight: 500; line-height: 27px;   letter-spacing: -0.01em; }
-.text-body-lg    { font-family: var(--font-switzer); font-size: 18px; font-weight: 400; line-height: 25.2px; letter-spacing: -0.01em; }
-.text-body-lg-em { font-family: var(--font-switzer); font-size: 18px; font-weight: 500; line-height: 25.2px; letter-spacing: -0.01em; }
-.text-body       { font-family: var(--font-switzer); font-size: 16px; font-weight: 400; line-height: 25.2px; letter-spacing: -0.01em; }
-.text-body-em    { font-family: var(--font-switzer); font-size: 16px; font-weight: 500; line-height: 25.2px; letter-spacing: -0.01em; }
-.text-body-sm    { font-family: var(--font-switzer); font-size: 14px; font-weight: 400; line-height: 20px;   letter-spacing: -0.01em; }
-.text-body-sm-em { font-family: var(--font-switzer); font-size: 14px; font-weight: 500; line-height: 20px;   letter-spacing: -0.01em; }
-.text-caption    { font-family: var(--font-switzer); font-size: 12px; font-weight: 500; line-height: 15px;   letter-spacing: -0.01em; }
-.text-caption-em { font-family: var(--font-switzer); font-size: 12px; font-weight: 700; line-height: 15px;   letter-spacing: -0.01em; }`;
+const CSS_TYPE = `/* Typografie — Switzer */
+.text-display    { font-family:var(--font); font-size:96px; font-weight:600; line-height:96px;   letter-spacing:-0.04em; }
+.text-display-em { font-family:var(--font); font-size:96px; font-weight:800; line-height:96px;   letter-spacing:-0.04em; }
+.text-h1         { font-family:var(--font); font-size:66px; font-weight:600; line-height:66px;   letter-spacing:-0.03em; }
+.text-h1-em      { font-family:var(--font); font-size:66px; font-weight:700; line-height:66px;   letter-spacing:-0.03em; }
+.text-h2         { font-family:var(--font); font-size:54px; font-weight:600; line-height:54px;   letter-spacing:-0.02em; }
+.text-h2-em      { font-family:var(--font); font-size:54px; font-weight:700; line-height:54px;   letter-spacing:-0.02em; }
+.text-h3         { font-family:var(--font); font-size:36px; font-weight:500; line-height:43px;   letter-spacing:-0.02em; }
+.text-h3-em      { font-family:var(--font); font-size:36px; font-weight:600; line-height:43px;   letter-spacing:-0.02em; }
+.text-h4         { font-family:var(--font); font-size:29px; font-weight:500; line-height:37px;   letter-spacing:-0.02em; }
+.text-h4-em      { font-family:var(--font); font-size:29px; font-weight:600; line-height:37px;   letter-spacing:-0.02em; }
+.text-h5         { font-family:var(--font); font-size:24px; font-weight:500; line-height:32px;   letter-spacing:-0.01em; }
+.text-h5-em      { font-family:var(--font); font-size:24px; font-weight:600; line-height:32px;   letter-spacing:-0.01em; }
+.text-h6         { font-family:var(--font); font-size:21px; font-weight:400; line-height:27px;   letter-spacing:-0.01em; }
+.text-h6-em      { font-family:var(--font); font-size:21px; font-weight:500; line-height:27px;   letter-spacing:-0.01em; }
+.text-body-lg    { font-family:var(--font); font-size:18px; font-weight:400; line-height:25.2px; letter-spacing:-0.01em; }
+.text-body-lg-em { font-family:var(--font); font-size:18px; font-weight:500; line-height:25.2px; letter-spacing:-0.01em; }
+.text-body       { font-family:var(--font); font-size:16px; font-weight:400; line-height:25.2px; letter-spacing:-0.01em; }
+.text-body-em    { font-family:var(--font); font-size:16px; font-weight:500; line-height:25.2px; letter-spacing:-0.01em; }
+.text-body-sm    { font-family:var(--font); font-size:14px; font-weight:400; line-height:20px;   letter-spacing:-0.01em; }
+.text-body-sm-em { font-family:var(--font); font-size:14px; font-weight:500; line-height:20px;   letter-spacing:-0.01em; }
+.text-caption    { font-family:var(--font); font-size:12px; font-weight:500; line-height:15px;   letter-spacing:-0.01em; }
+.text-caption-em { font-family:var(--font); font-size:12px; font-weight:700; line-height:15px;   letter-spacing:-0.01em; }`;
 
-const CSS_BTN = `/* Buttons */
+const CSS_BTN = `/* Buttons — font-weight 500 Medium (switzer-1) */
 .btn {
-  font-family: var(--font-switzer);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: opacity 0.15s, transform 0.1s;
-  white-space: nowrap;
+  font-family:var(--font); font-weight:500; letter-spacing:-0.01em;
+  border:none; cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  transition:opacity 0.13s, transform 0.1s; white-space:nowrap;
 }
-.btn:hover   { opacity: 0.85; }
-.btn:active  { transform: scale(0.97); }
-.btn:disabled { opacity: 0.38; cursor: not-allowed; }
+.btn:hover { opacity:0.82; }
+.btn:active { transform:scale(0.97); }
+.btn:disabled { opacity:0.36; cursor:not-allowed; }
 
-/* Maten */
-.btn-s { font-size: 16px; line-height: 24px; padding: 8px 16px;  height: 40px; }
-.btn-m { font-size: 17px; line-height: 28px; padding: 12px 20px; height: 52px; }
-.btn-l { font-size: 17px; line-height: 28px; padding: 16px 24px; height: 60px; }
+.btn-s { font-size:16px; line-height:24px; padding:8px 16px;  height:40px; }
+.btn-m { font-size:17px; line-height:28px; padding:12px 20px; height:52px; }
+.btn-l { font-size:17px; line-height:28px; padding:16px 24px; height:60px; }
 
-/* Icon only */
-.btn-icon-s { width: 40px; height: 40px; padding: 0; }
-.btn-icon-m { width: 52px; height: 52px; padding: 0; }
+.btn-icon-s { width:40px; height:40px; padding:0; border-radius:40px; font-size:18px; }
+.btn-icon-m { width:52px; height:52px; padding:0; border-radius:40px; font-size:20px; }
 
-/* Shape */
-.btn-round  { border-radius: 40px; }
-.btn-square { border-radius: 8px; }
+.btn-round  { border-radius:40px; }
+.btn-square { border-radius:8px; }
 
-/* Filled */
-.btn-primary   { background: var(--color-blauw);        color: #fff; }
-.btn-secondary { background: var(--color-zwart);        color: #fff; }
-.btn-dark      { background: var(--color-donker);       color: #fff; }
-.btn-alert     { background: var(--color-donkeroranje); color: #fff; }
-.btn-yellow    { background: var(--color-geel);         color: var(--color-donker); }
-.btn-green     { background: var(--color-groen);        color: #fff; }
+/* Alle kleurvarianten */
+.btn-blue   { background:var(--blue);   color:#fff; }
+.btn-yellow { background:var(--yellow); color:#27351d; }
+.btn-green  { background:var(--green);  color:#fff; }
+.btn-red    { background:var(--red);    color:#fff; } /* ook: alert */
+.btn-pink   { background:var(--pink);   color:#27351d; }
+.btn-purple { background:var(--purple); color:#fff; }
+.btn-black  { background:var(--black);  color:#fff; }
 
 /* Ghost */
-.btn-ghost {
-  background: transparent;
-  color: var(--color-zwart);
-  border: 1px solid var(--color-zand-25);
-}
-.btn-ghost:hover { background: rgba(21,22,20,0.04); opacity: 1; }
+.btn-ghost { background:transparent; color:var(--black); border:1px solid var(--sand-25); }
+.btn-ghost:hover { background:rgba(21,22,20,0.04); opacity:1; }
 
-.btn-ghost-dark {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.3);
-}
-.btn-ghost-dark:hover { background: rgba(255,255,255,0.08); opacity: 1; }`;
+.btn-ghost-dark { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.28); }
+.btn-ghost-dark:hover { background:rgba(255,255,255,0.07); opacity:1; }`;
 
 const CSS_FORM = `/* Form fields */
-.field       { display: flex; flex-direction: column; gap: 6px; }
-.field-label { font-size: 14px; font-weight: 600; color: var(--color-zwart); letter-spacing: -0.01em; }
-.field-label-optional { font-size: 13px; font-weight: 400; color: var(--color-zwart-60); }
+.field { display:flex; flex-direction:column; gap:5px; }
+.field-label { font-size:14px; font-weight:600; color:var(--black); letter-spacing:-0.01em; }
+.field-label-opt { font-size:12.5px; font-weight:400; color:var(--black-60); }
 
 .field-input {
-  font-family: var(--font-switzer);
-  font-size: 16px;
-  font-weight: 400;
-  color: var(--color-zwart);
-  background: #fff;
-  border: 1px solid var(--color-zand-25);
-  border-radius: 8px;
-  padding: 12px 16px;
-  width: 100%;
-  outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
-  letter-spacing: -0.01em;
-  -webkit-appearance: none;
+  font-family:var(--font); font-size:16px; font-weight:400; color:var(--black);
+  background:#fff; border:1px solid var(--sand-25); border-radius:8px;
+  padding:12px 16px; width:100%; outline:none;
+  transition:border-color 0.14s, box-shadow 0.14s; -webkit-appearance:none;
+}
+.field-input::placeholder { color:var(--sand-50); }
+.field-input:focus { border-color:var(--black); box-shadow:0 0 0 3px rgba(21,22,20,0.08); }
+.field-input--error { border-color:var(--red); }
+.field-input:disabled { opacity:0.4; cursor:not-allowed; }
+
+/* Filter pill */
+.field-input--filter { padding-left:40px; border-radius:40px; }
+
+/* Search bar — button flush inside field */
+.search-bar {
+  display:flex; align-items:stretch;
+  background:#fff; border:1px solid var(--sand-25);
+  border-radius:8px; overflow:hidden; height:52px;
+}
+.search-bar:focus-within { border-color:var(--black); box-shadow:0 0 0 3px rgba(21,22,20,0.08); }
+.search-bar-input { font-family:var(--font); font-size:16px; color:var(--black); background:transparent; border:none; outline:none; flex:1; padding:0 0 0 14px; }
+.search-bar-btn {
+  flex-shrink:0; font-family:var(--font); font-size:16px; font-weight:500;
+  background:var(--red); color:#fff; border:none;
+  padding:0 22px; cursor:pointer;
+  border-radius:0 7px 7px 0; /* flush left, rounded right */
 }
 
-.field-input::placeholder { color: var(--color-zand-50); }
-.field-input:hover:not(:disabled) { border-color: var(--color-zwart-60); }
+/* Datepicker */
+.datepicker-wrap { position:relative; display:inline-flex; }
+.datepicker-input { padding-right:44px; cursor:pointer; border-radius:8px; color:var(--black-60); }
 
-.field-input:focus {
-  border-color: var(--color-zwart);
-  box-shadow: 0 0 0 3px rgba(21, 22, 20, 0.08);
-}
+/* Increment */
+.increment { display:flex; align-items:center; gap:12px; }
+.increment-btn { width:32px; height:32px; border-radius:50%; border:1px solid var(--sand-25); background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; }
 
-.field-input--error { border-color: var(--color-rood); }
-.field-input--error:focus { box-shadow: 0 0 0 3px rgba(252, 81, 31, 0.12); }
-.field-input:disabled { opacity: 0.4; cursor: not-allowed; }
+/* Button group — geen padding, overflow clips corners */
+.btn-group { display:inline-flex; background:#fff; border:1px solid var(--sand-25); border-radius:8px; overflow:hidden; }
+.btn-group-item { font-family:var(--font); font-size:16px; font-weight:500; padding:12px 28px; border:none; border-radius:0; cursor:pointer; color:var(--black-60); background:transparent; }
+.btn-group-item + .btn-group-item { border-left:1px solid var(--sand-25); }
+.btn-group-item.active { background:var(--black); color:#fff; }
 
-.field-subtext        { font-size: 12px; color: var(--color-zwart-60); }
-.field-subtext--error { color: var(--color-rood); }
+/* Switch */
+.switch { display:flex; align-items:center; gap:4px; }
+.switch-btn { width:32px; height:32px; border-radius:50%; border:1px solid var(--sand-25); background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--black-60); font-size:14px; }
+.switch-btn.sw-active { background:var(--black); border-color:var(--black); color:#fff; }
 
-/* Textarea */
-.field-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
-
-/* Select */
-.field-select-wrap         { position: relative; }
-.field-select-wrap select  { padding-right: 40px; cursor: pointer; }
-.field-select-icon         { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; }
-
-/* Search */
-.field-search-wrap  { position: relative; }
-.field-search-icon  { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; }
-.field-input--search { padding-left: 42px; border-radius: 40px; }
-
-/* Checkbox */
-.checkbox-label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 15px; }
-.checkbox-input { display: none; }
-.checkbox-box {
-  width: 18px; height: 18px;
-  border: 1.5px solid var(--color-zand-25);
-  border-radius: 4px; background: #fff; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s, border-color 0.15s;
-}
-.checkbox-input:checked + .checkbox-box {
-  background: var(--color-zwart);
-  border-color: var(--color-zwart);
-}`;
+/* Phosphor icons — installeer via CDN of npm:
+   npm install @phosphor-icons/web */`;
 
 const TW_CONFIG = `/** @type {import('tailwindcss').Config} */
 export default {
@@ -902,32 +1196,29 @@ export default {
         switzer: ['Switzer', 'system-ui', 'sans-serif'],
       },
       colors: {
-        donker:       '#27351d',
-        geel:         '#fdc52f',
-        blauw:        '#3772ff',
-        groen:        '#379850',
-        rood:         '#fc511f',
-        donkeroranje: '#c83d14',
-        lichtoranje:  '#ffc288',
-        roze:         '#f895c0',
-        paars:        '#8c60b9',
-        wit:          '#ffffff',
-        zand: {
-          5:  '#f5f5ed',
-          10: '#f5f1e5',
-          25: '#d6d7cc',
-          50: '#9a958d',
+        blue:   '#3772ff',
+        yellow: '#fdc52f',
+        green:  '#379850',
+        red:    '#fc511f',
+        pink:   '#f895c0',
+        purple: '#8c60b9',
+        white:  '#ffffff',
+        sand: {
+          DEFAULT: '#f5f5ed',
+          10:      '#f5f1e5',
+          25:      '#d6d7cc',
+          50:      '#9a958d',
         },
-        zwart: {
+        black: {
           DEFAULT: '#151614',
-          60: '#737372',
-          80: '#50504f',
+          60:      '#737372',
+          80:      '#50504f',
         },
       },
       spacing: {
-        4: '4px', 8: '8px', 12: '12px', 16: '16px', 20: '20px',
-        24: '24px', 32: '32px', 40: '40px', 60: '60px',
-        80: '80px', 120: '120px', 160: '160px', 240: '240px',
+        4:'4px', 8:'8px', 12:'12px', 16:'16px', 20:'20px',
+        24:'24px', 32:'32px', 40:'40px', 60:'60px',
+        80:'80px', 120:'120px', 160:'160px', 240:'240px',
       },
       borderRadius: {
         sm:    '4px',
@@ -938,17 +1229,17 @@ export default {
         full:  '9999px',
       },
       fontSize: {
-        display:   ['96px', { lineHeight: '96px',   letterSpacing: '-0.04em' }],
-        h1:        ['66px', { lineHeight: '66px',   letterSpacing: '-0.03em' }],
-        h2:        ['54px', { lineHeight: '54px',   letterSpacing: '-0.02em' }],
-        h3:        ['36px', { lineHeight: '43px',   letterSpacing: '-0.02em' }],
-        h4:        ['29px', { lineHeight: '37px',   letterSpacing: '-0.02em' }],
-        h5:        ['24px', { lineHeight: '32px',   letterSpacing: '-0.01em' }],
-        h6:        ['21px', { lineHeight: '27px',   letterSpacing: '-0.01em' }],
-        'body-lg': ['18px', { lineHeight: '25.2px', letterSpacing: '-0.01em' }],
-        body:      ['16px', { lineHeight: '25.2px', letterSpacing: '-0.01em' }],
-        'body-sm': ['14px', { lineHeight: '20px',   letterSpacing: '-0.01em' }],
-        caption:   ['12px', { lineHeight: '15px',   letterSpacing: '-0.01em' }],
+        display:   ['96px', { lineHeight:'96px',   letterSpacing:'-0.04em', fontWeight:'600' }],
+        h1:        ['66px', { lineHeight:'66px',   letterSpacing:'-0.03em', fontWeight:'600' }],
+        h2:        ['54px', { lineHeight:'54px',   letterSpacing:'-0.02em', fontWeight:'600' }],
+        h3:        ['36px', { lineHeight:'43px',   letterSpacing:'-0.02em', fontWeight:'500' }],
+        h4:        ['29px', { lineHeight:'37px',   letterSpacing:'-0.02em', fontWeight:'500' }],
+        h5:        ['24px', { lineHeight:'32px',   letterSpacing:'-0.01em', fontWeight:'500' }],
+        h6:        ['21px', { lineHeight:'27px',   letterSpacing:'-0.01em', fontWeight:'400' }],
+        'body-lg': ['18px', { lineHeight:'25.2px', letterSpacing:'-0.01em' }],
+        body:      ['16px', { lineHeight:'25.2px', letterSpacing:'-0.01em' }],
+        'body-sm': ['14px', { lineHeight:'20px',   letterSpacing:'-0.01em' }],
+        caption:   ['12px', { lineHeight:'15px',   letterSpacing:'-0.01em' }],
       },
       fontWeight: {
         regular:   '400',
@@ -957,19 +1248,14 @@ export default {
         bold:      '700',
         extrabold: '800',
       },
-      height: {
-        'btn-s': '40px',
-        'btn-m': '52px',
-        'btn-l': '60px',
-      },
-      boxShadow: {
-        'elevation-1': '0 2px 8px rgba(21, 22, 20, 0.08)',
-      },
+      height: { 'btn-s':'40px', 'btn-m':'52px', 'btn-l':'60px' },
+      boxShadow: { 'elevation-1':'0 2px 8px rgba(21,22,20,0.08)' },
     },
   },
   plugins: [],
 }`;
 
+/* ── Nav ── */
 function nav(id, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -977,6 +1263,7 @@ function nav(id, btn) {
   if (btn) btn.classList.add('active');
 }
 
+/* ── Copy pre ── */
 function copyPre(btn) {
   const pre = btn.nextElementSibling;
   navigator.clipboard.writeText(pre.textContent).then(() => {
@@ -986,25 +1273,55 @@ function copyPre(btn) {
   });
 }
 
+/* ── Toast ── */
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg + ' gekopieerd';
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
+  setTimeout(() => t.classList.remove('show'), 2000);
 }
 
-renderColors('cg-primary', COLORS.primary);
-renderColors('cg-functional', COLORS.functional);
+/* ── Increment ── */
+let incVal = 2;
+function changeVal(d) {
+  incVal = Math.max(0, incVal + d);
+  document.getElementById('inc-val').textContent = incVal;
+}
+
+/* ── Button group ── */
+function selectGroup(btn) {
+  document.querySelectorAll('.btn-group-item').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ── Switch ── */
+let switchState = true; // true = on
+function setSwitch(on) {
+  switchState = on;
+  const offBtn = document.getElementById('sw-off');
+  const onBtn  = document.getElementById('sw-on');
+  if (on) {
+    onBtn.classList.add('sw-active');
+    offBtn.classList.remove('sw-active');
+  } else {
+    offBtn.classList.add('sw-active');
+    onBtn.classList.remove('sw-active');
+  }
+}
+
+/* ── Init ── */
+renderColors('cg-colors',  COLORS.all);
 renderColors('cg-neutral', COLORS.neutral);
-renderTypo('type-display', TYPOGRAPHY.display);
-renderTypo('type-body', TYPOGRAPHY.body);
+renderTypo('type-display', TYPO.display);
+renderTypo('type-body',    TYPO.body);
 renderSpacing();
 renderRadius();
-document.getElementById('pre-css').textContent      = CSS_ROOT;
-document.getElementById('pre-css-type').textContent = CSS_TYPE;
-document.getElementById('pre-css-btn').textContent  = CSS_BTN;
-document.getElementById('pre-css-form').textContent = CSS_FORM;
-document.getElementById('pre-tailwind').textContent = TW_CONFIG;
+renderIcons();
+document.getElementById('pre-css').textContent  = CSS_ROOT;
+document.getElementById('pre-type').textContent = CSS_TYPE;
+document.getElementById('pre-btn').textContent  = CSS_BTN;
+document.getElementById('pre-form').textContent = CSS_FORM;
+document.getElementById('pre-tw').textContent   = TW_CONFIG;
 </script>
 </body>
 </html>
